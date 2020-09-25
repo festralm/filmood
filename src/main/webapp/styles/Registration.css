@@ -87,6 +87,17 @@ footer {
     border-top-color: #CCCCCC;
 }
 
+input[type="checkbox"] {
+    display: inline-block;
+    width: 15px;
+    vertical-align: top;
+}
+
+.label-text {
+    display: inline-block;
+    width: 200px;
+    word-break: break-all;
+}
 
 
 
