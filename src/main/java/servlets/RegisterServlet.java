@@ -26,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }
         else {
-            String path = "/jsp/temp_registration.jsp";
+            String path = "/Registration.html";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);

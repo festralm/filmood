@@ -28,24 +28,30 @@ public class RegistrationFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) resp;
 
-        final String login = req.getParameter("login");
-        final String password = req.getParameter("password");
+        final String login = req.getParameter("text");
+        final String email = req.getParameter("email");
+        final String password1 = req.getParameter("password1");
+        final String password2 = req.getParameter("password2");
 
-        @SuppressWarnings("unchecked")
-        final AtomicReference<UserDAO> dao = (AtomicReference<UserDAO>) request.getServletContext().getAttribute("dao");
-
-        final HttpSession session = request.getSession();
-
-        if (CheckSession.check(session, request)) {
-            response.sendRedirect(request.getContextPath());
+        if (!password1.equals(password2)) {
+            response.sendRedirect("register");
         }
         else {
-            if (!dao.get().isLoginExist(login)) {
-                dao.get().add(new User(dao.get().getStoreSize(), login, password));
-                LogIn.logIn(login, password, req, resp, request, response);
+            @SuppressWarnings("unchecked") final AtomicReference<UserDAO> dao = (AtomicReference<UserDAO>) request.getServletContext().getAttribute("dao");
+
+            final HttpSession session = request.getSession();
+
+            if (CheckSession.check(session, request)) {
+                response.sendRedirect(request.getContextPath());
             } else {
-                request.getSession().setAttribute("check_login", false);
-                req.getRequestDispatcher("jsp/temp_registration.jsp").forward(req, resp);
+                if (!dao.get().isLoginExist(login)) {
+                    dao.get().add(new User(dao.get().getStoreSize(), login, email, password1));
+                    LogIn.logIn(login, password1, req, resp, request, response);
+                } else {
+                    request.getSession().setAttribute("check_login", false);
+                    response.sendRedirect("register");
+                    //req.getRequestDispatcher("jsp/temp_registration.jsp").forward(req, resp);
+                }
             }
         }
     }

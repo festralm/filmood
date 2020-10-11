@@ -1,5 +1,6 @@
 package models;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -18,14 +19,14 @@ public class LogIn {
         request.getSession().setAttribute("check_password", true);
 
         Cookie cookie = new Cookie("user", login + password);
-        if (req.getParameter("remember") == null) {
+        if (req.getParameter("check") == null) {
             cookie.setMaxAge(60 * 30);
         }
         else {
             cookie.setMaxAge(60 * 60 * 2);
         }
         response.addCookie(cookie);
-
-        req.getRequestDispatcher("html/temp_main_page_authorized.html").forward(req, resp);
+        response.sendRedirect("main");
+        //req.getRequestDispatcher("/main").forward(req, resp);
     }
 }

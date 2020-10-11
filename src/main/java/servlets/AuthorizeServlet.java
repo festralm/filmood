@@ -12,6 +12,15 @@ import java.io.IOException;
 @WebServlet("/authorize")
 public class AuthorizeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (CheckSession.check(request.getSession(), request)) {
+            response.sendRedirect(request.getContextPath());
+        }
+        else {
+            String path = "/SignIn.html";
+            ServletContext servletContext = getServletContext();
+            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+            requestDispatcher.forward(request, response);
+        }
 
     }
 
@@ -20,7 +29,7 @@ public class AuthorizeServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }
         else {
-            String path = "/jsp/temp_authorization.jsp";
+            String path = "/SignIn.html";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);

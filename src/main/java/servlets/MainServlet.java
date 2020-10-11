@@ -15,6 +15,14 @@ import java.io.IOException;
 public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        final HttpSession session = request.getSession();
+        ServletContext servletContext = getServletContext();
+        if (CheckSession.check(session, request)) {
+            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+        } else {
+            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,9 +30,9 @@ public class MainServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/html/temp_main_page_authorized.html").forward(request, response);
+            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
         } else {
-            servletContext.getRequestDispatcher("/html/temp_main_page_non_authorized.html").forward(request, response);
+            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
         }
     }
 }

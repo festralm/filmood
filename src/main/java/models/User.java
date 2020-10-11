@@ -6,13 +6,15 @@ public class User implements UserInterface {
     private int id;
     private String login;
     private int passwordHash;
+    private String email;
 
     public User() {
     }
 
-    public User(int id, String login, String passwordHash) {
+    public User(int id, String login, String email, String passwordHash) {
         this.id = id;
         this.login = login;
+        this.email = email;
         this.passwordHash = passwordHash.hashCode();
     }
 
@@ -36,6 +38,14 @@ public class User implements UserInterface {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+       this.email = email;
     }
 
     public int getPasswordHash() {

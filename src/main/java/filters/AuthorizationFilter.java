@@ -26,8 +26,8 @@ public class AuthorizationFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) resp;
 
-        final String login = req.getParameter("login");
-        final String password = req.getParameter("password");
+        final String login = req.getParameter("text");
+        final String password = req.getParameter("password1");
 
         @SuppressWarnings("unchecked")
         final AtomicReference<DataAccessable> dao = (AtomicReference<DataAccessable>) request.getServletContext().getAttribute("dao");
@@ -42,7 +42,8 @@ public class AuthorizationFilter implements Filter {
                 LogIn.logIn(login, password, req, resp, request, response);
             } else {
                 request.getSession().setAttribute("check_password", false);
-                req.getRequestDispatcher("jsp/temp_authorization.jsp").forward(req, resp);
+                response.sendRedirect("authorize");
+                //req.getRequestDispatcher("/authorize").forward(req, resp);
             }
         }
     }
