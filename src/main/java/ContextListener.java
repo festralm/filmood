@@ -1,21 +1,21 @@
-import models.User;
-import models.UserDAO;
+import dao.*;
+import dto.*;
+import useful.PasswordAuthentication;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-import javax.servlet.http.HttpSessionBindingEvent;
-import java.util.concurrent.atomic.AtomicReference;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @WebListener()
 public class ContextListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
 
-    private AtomicReference<UserDAO> dao;
+    private UserDao userDao = new UserDaoMySql();
+    private byte[] salt = new byte[16];
+
     // Public constructor is required by servlet spec
     public ContextListener() {
     }
@@ -25,26 +25,43 @@ public class ContextListener implements ServletContextListener,
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent sce) {
       /* This method is called when the servlet context is
-         initialized(when the Web application is deployed). 
+         initialized(when the Web application is deployed).
          You can initialize servlet context related data here.
       */
-        dao = new AtomicReference<>(new UserDAO());
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(salt);
 
-        dao.get().add(new User(1, "alia", "alia@gmail.com", "alia"));
-        dao.get().add(new User(2, "chulpan", "chulpan@gmail.com", "chulpan"));
+//        User alia = new User();
+//        alia.setUsername("alia");
+//        alia.setPassword(PasswordAuthentication.hashPassword("alia".toCharArray(), salt));
+//        alia.setEmail("alia@gmail.com");
+//        alia.setBirthdate(new Date(2000, 1, 25));
+//        alia.setFullname("Миннегараева Алия Рустемовна");
+//
+//
+//        User chulpan = new User();
+//        chulpan.setUsername("chulpan");
+//        chulpan.setPassword(PasswordAuthentication.hashPassword("chulpan".toCharArray(), salt));
+//        chulpan.setEmail("chulpan@gmail.com");
+//        chulpan.setBirthdate(new Date(2001, 1, 1));
+//        chulpan.setFullname("Хайруллина  Чулпан Маратовна");
+//
+//        userDao.addUser(alia);
+//        userDao.addUser(chulpan);
 
-        final ServletContext servletContext =
-                sce.getServletContext();
+        final ServletContext servletContext = sce.getServletContext();
 
-        servletContext.setAttribute("dao", dao);
+        servletContext.setAttribute("userDao", userDao);
+        servletContext.setAttribute("salt", salt);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
-      /* This method is invoked when the Servlet Context 
-         (the Web application) is undeployed or 
+      /* This method is invoked when the Servlet Context
+         (the Web application) is undeployed or
          Application Server shuts down.
       */
-        dao = null;
+        userDao = null;
+        salt = new byte[16];
     }
 
     // -------------------------------------------------------
@@ -63,7 +80,7 @@ public class ContextListener implements ServletContextListener,
     // -------------------------------------------------------
 
     public void attributeAdded(HttpSessionBindingEvent sbe) {
-      /* This method is called when an attribute 
+      /* This method is called when an attribute
          is added to a session.
       */
     }

@@ -1,6 +1,6 @@
-package servlets;
+package servlet;
 
-import models.CheckSession;
+import useful.CheckSession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(RegisterServlet.class.getName());
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -24,8 +25,7 @@ public class RegisterServlet extends HttpServlet {
 
         if (CheckSession.check(request.getSession(), request)) {
             response.sendRedirect(request.getContextPath());
-        }
-        else {
+        } else {
             String path = "/Registration.html";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

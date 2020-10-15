@@ -1,6 +1,6 @@
-package servlets;
+package servlet;
 
-import models.CheckSession;
+import useful.CheckSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +23,6 @@ public class LogOutServlet extends HttpServlet {
             //cookie.setMaxAge(-1); // удаляется тогда, когда закроет браузер
             response.addCookie(cookie);
         }
-        response.sendRedirect("/fm/main");
+        response.sendRedirect("/fm");
     }
 }

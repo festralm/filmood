@@ -1,4 +1,4 @@
-package models;
+package useful;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,17 +9,15 @@ import static java.util.Objects.nonNull;
 public class CheckSession {
     public static boolean check(HttpSession httpSession, HttpServletRequest request) {
         if (nonNull(httpSession)) {
-            Object login = httpSession.getAttribute("login");
+            Object login = httpSession.getAttribute("username");
             Object password = httpSession.getAttribute("password");
             if (nonNull(login) && nonNull(password)) {
                 if (checkCookie(request, (String) login, (String) password)) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -30,9 +28,9 @@ public class CheckSession {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             String cookieName = cookie.getName();
-            if (cookieName.equals("user") && cookie.getValue().equals(login + password)){
+            if (cookieName.equals("user") && cookie.getValue().equals(login + password)) {
                 return true;
-            };
+            }
         }
         return false;
     }

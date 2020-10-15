@@ -1,6 +1,6 @@
-package servlets;
+package servlet;
 
-import models.CheckSession;
+import useful.CheckSession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,23 +12,13 @@ import java.io.IOException;
 @WebServlet("/authorize")
 public class AuthorizeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (CheckSession.check(request.getSession(), request)) {
-            response.sendRedirect(request.getContextPath());
-        }
-        else {
-            String path = "/SignIn.html";
-            ServletContext servletContext = getServletContext();
-            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
-            requestDispatcher.forward(request, response);
-        }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (CheckSession.check(request.getSession(), request)) {
             response.sendRedirect(request.getContextPath());
-        }
-        else {
+        } else {
             String path = "/SignIn.html";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

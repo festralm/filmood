@@ -1,6 +1,6 @@
-package servlets;
+package servlet;
 
-import models.CheckSession;
+import useful.CheckSession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/main")
+@WebServlet("")
 public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
