@@ -29,7 +29,6 @@ public class LogOutServlet extends HttpServlet {
             //cookie.setMaxAge(-1); // удаляется тогда, когда закроет браузер
             response.addCookie(cookie);
             request.getSession().setAttribute("username", null);
-            request.getSession().setAttribute("password", null);
         }
         response.sendRedirect("/fm/");
     }

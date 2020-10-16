@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 public class UserService {
     private static final String SALT = "fghbjkl;op'iuytrfghbj,klolkyjtrhdsgfhcvghjoikp'.,njbmhvg";
     private UserDao userDao = new UserDaoMySql();
-    private String passwordHash = "";
     private PasswordAuthentication passwordAuthentication = new PasswordAuthentication();
 
     public boolean enrollUser(String username, char[] password, String email) throws DataIsEmpty, CouldntAddData {
@@ -30,7 +29,7 @@ public class UserService {
             throw new PasswordIsEmpty();
         }
 
-        passwordHash = passwordAuthentication.hashPassword(password);
+        String passwordHash = passwordAuthentication.hashPassword(password);
         User user = new User(username, passwordHash, email);
 
         if (!userDao.addUser(user)) {
@@ -44,18 +43,14 @@ public class UserService {
         return userDao.isUsernameExist(username);
     }
 
-    public User authenticateUser(String username, char[] password) {
+    public boolean authenticateUser(String username, char[] password) {
         User user = userDao.getUserByUsername(username);
-        if (user == null ||
-                !passwordAuthentication.hashPassword(password).equals(user.getPassword())) return null;
-        return user;
+        return user != null &&
+                passwordAuthentication.hashPassword(password).equals(user.getPassword());
     }
 
-    public String getPasswordHash() throws UsersPasswordIsNull {
-        if (passwordHash == null) {
-            throw new UsersPasswordIsNull();
-        }
-        return passwordHash;
+    public User getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
     }
 
     private static final class PasswordAuthentication

@@ -2,6 +2,7 @@ package servlet;
 
 import dao.UserDao;
 import dto.User;
+import service.UserService;
 import useful.CheckSession;
 
 import javax.servlet.ServletContext;
@@ -33,12 +34,18 @@ public class ProfileServlet extends HttpServlet {
         if (CheckSession.check(session, request)) {
             servletContext.getRequestDispatcher("/pages/Account.html").forward(request, response);
 
-            final UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-
+            UserService userService = new UserService();
             String username = (String) session.getAttribute("username");
-            User user = userDao.getUserByUsername(username);
 
+            User user = userService.getUserByUsername(username);
 
+            request.setAttribute("fullname", user.getFullname());
+            request.setAttribute("username", username);
+            request.setAttribute("email", user.getEmail());
+            request.setAttribute("birthdate", user.getBirthdate());
+            request.setAttribute("password", user.getPassword());
+
+            request.getRequestDispatcher("").forward(request, response);
 
         } else {
             response.sendRedirect("/authorize");

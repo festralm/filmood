@@ -46,11 +46,7 @@ public class RegistrationFilter implements Filter {
                     } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
                         dataIsEmpty.printStackTrace();
                     }
-                    try {
-                        LogIn.logIn(username, userService.getPasswordHash(), req, resp, request, response);
-                    } catch (UsersPasswordIsNull usersPasswordIsNull) {
-                        usersPasswordIsNull.printStackTrace();
-                    }
+                    LogIn.logIn(username, req, request, response);
                 } else {
                     request.getSession().setAttribute("check_login", false);
                     response.sendRedirect("register");

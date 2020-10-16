@@ -101,8 +101,8 @@ public class UserDaoMySql implements UserDao {
     }
 
     @Override
-    public boolean isUserExist(String login, String passwordHash) {
-        return getUserByUsernamePassword(login, passwordHash) != null;
+    public boolean isUserExist(String username, String passwordHash) {
+        return getUserByUsernamePassword(username, passwordHash) != null;
     }
 
     @Override
