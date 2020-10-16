@@ -5,27 +5,36 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    background: black;
+}
+
+header{
+    border-bottom-color: #ff3838;
 }
 
 .area1 {
-    background: #232323;
-    height: 60vh;
+    height: 80vh;
+    /*background: black;*/
+    background-image: url("https://sun9-25.userapi.com/XohHOw60Ys0Eg7fP5gmDfYXkbH9b8VY-jOPsFA/YFT8lO8KCEY.jpg");
+}
+
+.area2 {
+    height: 120vh;
+    background: black;
 }
 
 h1 {
     color: white;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 1px;
     font-style: normal;
-    font-weight: bolder;
-    font-size: 92px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.35);
-    background: linear-gradient(45deg, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+    font-weight: bold;
+    font-size: 64px;
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: table;
-    margin: 80px auto;
+    margin: 120px auto;
 }
 
 h2 {
@@ -40,7 +49,7 @@ h2 {
 }
 
 h3 {
-    color: #232323;
+    color: white;
     text-align: center;
     position: center;
     font-style: normal;
@@ -48,26 +57,26 @@ h3 {
     font-size: 24px;
 }
 
-.button1, .button2 {
-    font-size: 27px;
-    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-    border-radius: 25px;
-    color: white;
-    text-align: center;
-    font-style: normal;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border: none;
-    padding: 15px 32px;
-    text-decoration: none;
-}
+/*.button1, .button2 {*/
+/*    font-size: 27px;*/
+/*    border-radius: 25px;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*    font-style: normal;*/
+/*    margin-top: 20px;*/
+/*    margin-bottom: 10px;*/
+/*    border: none;*/
+/*    padding: 15px 32px;*/
+/*    text-decoration: none;*/
+/*}*/
 
 .menu {
-    padding-top: 15px;
-    background-color: rgba(35, 35, 35, 0.77);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
     align-items: center;
     text-align: center;
-    color: #232323;
+    color: white;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -77,12 +86,12 @@ a {
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
-    color: lightgray;
+    color: white;
     text-decoration: none; /* Убираем подчеркивание у ссылок */
 }
 
 a:hover {
-    text-decoration: #fd868c underline;
+    text-decoration: #834FD0 underline;
     color: white;
     font-weight: bold;
 }
@@ -120,40 +129,52 @@ form.window{
 
 .area2 {
     height: 290px;
-    margin-top: 30px;
+    margin: 50px;
     display: flex;
     overflow: auto;
     text-align: center;
 }
 
+p {
+    color: white;
+}
+
 .area2 div:nth-child(1) {
     flex: 1;
+    padding-right: 30px;
 }
 
 .area2 div:nth-child(2) {
     flex: 1;
+    padding-right: 30px;
 }
 
 .area2 div:nth-child(3) {
     flex: 1;
+    padding-right: 30px;
 }
 
 .button3, .button4, .button5 {
-    font-size: 16px;
-    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-    border-radius: 25px;
+    font-size: 17px;
+    font-weight: bold;
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    border-radius: 8px;
     color: white;
     text-align: center;
     font-style: normal;
-
+    margin-top: 30px;
     border: none;
     padding: 15px 32px;
     text-decoration: none;
 }
 
+.button5 {
+    margin-top: 45px;
+}
+
 footer {
-    color: floralwhite;
-    background: #232323; /* Цвет фона */
+    color: ghostwhite;
+    background: #141414 79%; /* Цвет фона */
     padding: 10px; /* Поля вокруг текста */
     flex: 0 0 auto;
 }
