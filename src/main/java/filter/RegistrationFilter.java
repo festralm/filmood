@@ -1,10 +1,11 @@
 package filter;
 
-import dao.UserDao;
+import exception.CouldntAddData;
+import exception.DataIsEmpty;
+import exception.UsersPasswordIsNull;
+import service.UserService;
 import useful.CheckSession;
-import dto.User;
 import useful.LogIn;
-import useful.PasswordAuthentication;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 @WebFilter(filterName = "RegistrationFilter")
 public class RegistrationFilter implements Filter {
@@ -34,19 +34,23 @@ public class RegistrationFilter implements Filter {
         if (!Arrays.equals(password1, password2)) {
             response.sendRedirect("register");
         } else {
-            final UserDao dao = (UserDao) request.getServletContext().getAttribute("userDao");
-
             final HttpSession session = request.getSession();
 
             if (CheckSession.check(session, request)) {
                 response.sendRedirect(request.getContextPath());
             } else {
-                if (!dao.isUsernameExist(username)) {
-                    final int cost = (int) request.getServletContext().getAttribute("cost");
-                    PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
-                    String passwordHash = passwordAuthentication.hashPassword(password1);
-                    dao.addUser(new User(username, passwordHash, email));
-                    LogIn.logIn(username, passwordHash, req, resp, request, response);
+                UserService userService = new UserService();
+                if (!userService.isUserExist(username)) {
+                    try {
+                        userService.enrollUser(username, password1, email);
+                    } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
+                        dataIsEmpty.printStackTrace();
+                    }
+                    try {
+                        LogIn.logIn(username, userService.getPasswordHash(), req, resp, request, response);
+                    } catch (UsersPasswordIsNull usersPasswordIsNull) {
+                        usersPasswordIsNull.printStackTrace();
+                    }
                 } else {
                     request.getSession().setAttribute("check_login", false);
                     response.sendRedirect("register");

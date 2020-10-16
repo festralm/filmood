@@ -1,10 +1,9 @@
 package filter;
 
-import dao.*;
 import dto.User;
+import service.UserService;
 import useful.CheckSession;
 import useful.LogIn;
-import useful.PasswordAuthentication;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -31,13 +30,10 @@ public class AuthorizationFilter implements Filter {
             final String username = req.getParameter("text");
             final char[] password = req.getParameter("password1").toCharArray();
 
-            final UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-            final int cost = (int) request.getServletContext().getAttribute("cost");
+            UserService userService = new UserService();
+            User user = userService.authenticateUser(username, password);
 
-            User user = userDao.getUserByUsername(username);
-            PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
-
-            if (user != null && passwordAuthentication.authenticate(password, user.getPassword())) {
+            if (user != null) {
                 LogIn.logIn(username, user.getPassword(), req, resp, request, response);
             } else {
                 request.getSession().setAttribute("check_password", false);

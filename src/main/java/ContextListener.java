@@ -1,25 +1,14 @@
-import dao.*;
-import dto.*;
-import lombok.SneakyThrows;
-import useful.PasswordAuthentication;
+import exception.CouldntAddData;
+import exception.DataIsEmpty;
+import service.UserService;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.security.SecureRandom;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Scanner;
 
 @WebListener()
 public class ContextListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
-
-    private UserDao userDao = new UserDaoMySql();
-    private int cost = 15;
 
     // Public constructor is required by servlet spec
     public ContextListener() {
@@ -35,31 +24,25 @@ public class ContextListener implements ServletContextListener,
          initialized(when the Web application is deployed).
          You can initialize servlet context related data here.
       */
+        UserService aliaService = new UserService();
 
-//        PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
-//
-//        User alia = new User();
-//        alia.setUsername("alia");
-//        alia.setPassword(passwordAuthentication.hashPassword("alia".toCharArray()));
-//        alia.setEmail("alia@gmail.com");
-//        alia.setBirthdate(new Date(2000, 1, 25));
-//        alia.setFullname("Миннегараева Алия Рустемовна");
-//
-//
-//        User chulpan = new User();
-//        chulpan.setUsername("chulpan");
-//        chulpan.setPassword(passwordAuthentication.hashPassword("chulpan".toCharArray()));
-//        chulpan.setEmail("chulpan@gmail.com");
-//        chulpan.setBirthdate(new Date(2001, 1, 1));
-//        chulpan.setFullname("Хайруллина  Чулпан Маратовна");
-//
-//        userDao.addUser(alia);
-//        userDao.addUser(chulpan);
+        if (!aliaService.isUserExist("alia")) {
+            try {
+                aliaService.enrollUser("alia", "alia".toCharArray(), "alia@gmail.com");
+            } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
+                dataIsEmpty.printStackTrace();
+            }
+        }
 
-        final ServletContext servletContext = sce.getServletContext();
+        UserService chulpanService = new UserService();
+        if (!chulpanService.isUserExist("chulpan")) {
+            try {
+                chulpanService.enrollUser("chulpan", "chulpan".toCharArray(), "chulpan@gmail.com");
+            } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
+                dataIsEmpty.printStackTrace();
+            }
+        }
 
-        servletContext.setAttribute("userDao", userDao);
-        servletContext.setAttribute("cost", cost);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
@@ -67,7 +50,6 @@ public class ContextListener implements ServletContextListener,
          (the Web application) is undeployed or
          Application Server shuts down.
       */
-        userDao = null;
     }
 
     // -------------------------------------------------------
