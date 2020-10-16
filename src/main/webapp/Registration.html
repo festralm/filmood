@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/Registration.css">
+</head>
+<body>
+
+<div class="menu" role="menu">    
+<nav>
+    <a href="пустые/MyFilms.html" id="myFilms">Моё кино</a> ||
+    <a href="пустые/Favorites.html" id="favorites">Избранное</a> ||
+    <a href="пустые/SelectedFilms.html" id="selectedFilms">Буду смотреть</a> ||
+    <a href="пустые/Categories.html" id="categories">Категории</a> ||
+    <a href="пустые/Account.html" id="account">Мой профиль</a>
+</nav>
+</div>
+
+<header role="banner">
+    <h1>Регистрация</h1>
+</header>
+
+<form method="post" action="registerin">
+    <p>
+        <label for="name"></label><br>
+        <input type="text" name="text" id="name" placeholder="Имя пользователя" size="200"/><br>
+    </p>
+
+    <p>
+        <label for="email"></label><br>
+        <input type="email" name="email" id="email" placeholder="E-mail" size="200"/><br>
+    </p>
+
+    <p>
+        <label for="password1"></label><br>
+        <input type="password" name="password1" id="password1" placeholder="Введите пароль" size="200"/><br>
+    </p>
+
+    <p>
+        <label for="password2"></label><br>
+        <input type="password" name="password2" id="password2" placeholder="Повторите парроль" size="200"/><br>
+    </p>
+
+    <input type="checkbox" name="check" value="Запомни меня" id="check"><label for="check">Запомнить меня</label><br>
+    <input class="button" type="submit" name="enter" value="Готово!"/>
+</form>
+
+<footer>
+    <p>Мы всегда готовы Вам помочь!</p>
+    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
+</footer>
+
+</body>
+</html>
