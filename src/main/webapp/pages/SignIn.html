@@ -8,6 +8,10 @@
 </head>
 <body>
 <div class="menu" role="menu">
+    <div class="page_name" id="page_name">
+        <a href="home_page.html">FILM <span class="colortext">&</span> MOOD</a>
+    </div>
+
     <nav>
         <nav>
             <a href="forFeature/myFilms.html" id="myFilms">Моё кино</a> ||
@@ -18,26 +22,46 @@
         </nav>
     </nav>
 </div>
-<header role="banner">
-    <h1>Вход</h1>
-</header>
 
-<form>
-    <p>
-        <label for="name"></label><br>
-        <input type="text" name="text" id="name" placeholder="Имя пользователя"/><br>
-    </p>
+<div class="form" id="form">
+    <div class="image">
+    </div>
 
-    <p>
-        <label for="password1"></label><br>
-        <input type="password" name="password1" id="password1" placeholder="Введите пароль"/><br>
-    </p>
+    <div class="authorization_form">
+        <form method="post" action="">
+            <h1>Вход</h1>
+            <div>
+                <input type="text" name="username" id="username" placeholder=" " required/>
+                <label for="username">Имя и фамилия</label>
+            </div>
 
-    <input type="checkbox" name="check" value="Запомни меня" id="check"><label for="check">Запомнить меня</label><br>
-    <input class="button" type="submit" name="enter" value="Войти"/><br>
 
-    <a class="reg" href="Registration.html">Ещё не зарегистрированы?</a>
-</form>
+            <div>
+                <input type="password" name="password" id="password" placeholder=" " minlength="8" maxlength="32" required/>
+                <label for="password">Введите пароль</label>
+
+                <div class="requirements">
+                    Пароль неверный
+                </div>
+            </div>
+
+
+            <p>
+                <label><input type="checkbox" name="remember_me">Запомнить меня</label>
+            </p>
+
+            <p>
+                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
+            </p>
+
+
+            <a class="registration" id="registration" href="SignIn.html">Ещё не зарегистрированы?</a>
+
+
+        </form>
+    </div>
+</div>
+
 
 <footer>
     <p>Мы всегда готовы Вам помочь!</p>

@@ -8,44 +8,70 @@
 </head>
 <body>
 
-<div class="menu" role="menu">    
-<nav>
-    <a href="forFeature/myFilms.html" id="myFilms">Моё кино</a> ||
-    <a href="forFeature/Favorites.html" id="favorites">Избранное</a> ||
-    <a href="forFeature/selectedFilms.html" id="selectedFilms">Буду смотреть</a> ||
-    <a href="forFeature/Categories.html" id="categories">Категории</a> ||
-    <a href="Account.html" id="account">Мой профиль</a>
-</nav>
+<div class="menu" role="menu">
+    <div class="page_name" id="page_name">
+        <a href="home_page.html">FILM <span class="colortext">&</span> MOOD</a>
+    </div>
+
+    <nav>
+        <a href="forFeature/myFilms.html" id="myFilms">Моё кино</a> ||
+        <a href="forFeature/Favorites.html" id="favorites">Избранное</a> ||
+        <a href="forFeature/selectedFilms.html" id="selectedFilms">Буду смотреть</a> ||
+        <a href="forFeature/Categories.html" id="categories">Категории</a> ||
+        <a href="Account.html" id="account">Мой профиль</a>
+    </nav>
 </div>
 
-<header role="banner">
-    <h1>Регистрация</h1>
-</header>
+<div class="form">
+    <div class="authorization_form">
+        <form method="post" action="">
+            <h1>Регистрация</h1>
+            <div>
+                <input type="text" name="username" id="username" placeholder=" " required/>
+                <label for="username">Имя и фамилия</label>
+            </div>
 
-<form>
-    <p>
-        <label for="name"></label><br>
-        <input type="text" name="text" id="name" placeholder="Имя пользователя" size="200"/><br>
-    </p>
+            <div>
+                <input type="email" name="email" id="email" placeholder=" " required/>
+                <label for="email">E-mail</label>
 
-    <p>
-        <label for="email"></label><br>
-        <input type="email" name="email" id="email" placeholder="E-mail" size="200"/><br>
-    </p>
+                <div class="requirements">
+                    E-mail введён некорректно
+                </div>
+            </div>
 
-    <p>
-        <label for="password1"></label><br>
-        <input type="password" name="password1" id="password1" placeholder="Введите пароль" size="200"/><br>
-    </p>
+            <div>
+                <input type="password" name="password" id="password" placeholder=" " minlength="8" maxlength="32"
+                       required/>
+                <label for="password">Введите пароль</label>
 
-    <p>
-        <label for="password2"></label><br>
-        <input type="password" name="password2" id="password2" placeholder="Повторите парроль" size="200"/><br>
-    </p>
+                <div class="requirements">
+                    Пароль должен содержать не менее 8 знаков
+                </div>
+            </div>
 
-    <input type="checkbox" name="check" value="Запомни меня" id="check"><label for="check">Запомнить меня</label><br>
-    <input class="button" type="submit" name="enter" value="Готово!"/>
-</form>
+            <div>
+                <input type="password" name="repeat_password" id="repeat_password" placeholder=" " minlength="8"
+                       maxlength="32"
+                       required/>
+                <label for="repeat_password">Повторите пароль</label>
+
+                <div class="requirements">
+                    Введённые пароли не совпадают
+                </div>
+            </div>
+
+            <p>
+                <label><input class="check" type="checkbox" name="remember_me">Запомнить меня</label>
+            </p>
+
+            <p>
+                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
+            </p>
+
+        </form>
+    </div>
+</div>
 
 <footer>
     <p>Мы всегда готовы Вам помочь!</p>
