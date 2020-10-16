@@ -18,9 +18,9 @@ public class MainServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+            servletContext.getRequestDispatcher("/pages/helloPageForUser.html").forward(request, response);
         } else {
-            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+            servletContext.getRequestDispatcher("/pages/helloPage.html").forward(request, response);
         }
     }
 
@@ -29,9 +29,9 @@ public class MainServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+            servletContext.getRequestDispatcher("/pages/helloPageForUser.html").forward(request, response);
         } else {
-            servletContext.getRequestDispatcher("/helloPage.html").forward(request, response);
+            servletContext.getRequestDispatcher("/pages/helloPage.html").forward(request, response);
         }
     }
 }

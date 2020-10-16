@@ -1,7 +1,6 @@
 package dao;
 
 import dto.User;
-import useful.PasswordAuthentication;
 
 import java.sql.*;
 import java.util.logging.*;
@@ -16,7 +15,7 @@ public class UserDaoMySql implements UserDao {
     }
 
     @Override
-    public User getUserByLoginPassword(String username, String passwordHash) {
+    public User getUserByUsernamePassword(String username, String passwordHash) {
         try (Connection con = connection.getNewConnection()) {
             String sql = "select id, username, password, email, birthdate, fullname " +
                     "from filmood.user " +
@@ -103,7 +102,7 @@ public class UserDaoMySql implements UserDao {
 
     @Override
     public boolean isUserExist(String login, String passwordHash) {
-        return getUserByLoginPassword(login, passwordHash) != null;
+        return getUserByUsernamePassword(login, passwordHash) != null;
     }
 
     @Override

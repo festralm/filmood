@@ -6,7 +6,7 @@ public interface UserDao {
     User getUserById(int id);
 
     //  Role getRoleByLoginPassword(final String login, final String passwordHash);
-    User getUserByLoginPassword(final String login, final String passwordHash);
+    User getUserByUsernamePassword(final String login, final String passwordHash);
 
     User getUserByUsername(final String login);
 
