@@ -35,7 +35,6 @@ public class RegistrationFilter implements Filter {
             response.sendRedirect("register");
         } else {
             final UserDao dao = (UserDao) request.getServletContext().getAttribute("userDao");
-            final byte[] salt = (byte[]) request.getServletContext().getAttribute("salt");
 
             final HttpSession session = request.getSession();
 
@@ -43,7 +42,9 @@ public class RegistrationFilter implements Filter {
                 response.sendRedirect(request.getContextPath());
             } else {
                 if (!dao.isUsernameExist(username)) {
-                    String passwordHash = PasswordAuthentication.hashPassword(password1, salt);
+                    final int cost = (int) request.getServletContext().getAttribute("cost");
+                    PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
+                    String passwordHash = passwordAuthentication.hashPassword(password1);
                     dao.addUser(new User(username, passwordHash, email));
                     LogIn.logIn(username, passwordHash, req, resp, request, response);
                 } else {

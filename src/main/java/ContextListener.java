@@ -1,20 +1,25 @@
 import dao.*;
 import dto.*;
+import lombok.SneakyThrows;
 import useful.PasswordAuthentication;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Scanner;
 
 @WebListener()
 public class ContextListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
 
     private UserDao userDao = new UserDaoMySql();
-    private byte[] salt = new byte[16];
+    private int cost = 15;
 
     // Public constructor is required by servlet spec
     public ContextListener() {
@@ -23,17 +28,19 @@ public class ContextListener implements ServletContextListener,
     // -------------------------------------------------------
     // ServletContextListener implementation
     // -------------------------------------------------------
+
+
     public void contextInitialized(ServletContextEvent sce) {
       /* This method is called when the servlet context is
          initialized(when the Web application is deployed).
          You can initialize servlet context related data here.
       */
-        SecureRandom random = new SecureRandom();
-        random.nextBytes(salt);
 
+//        PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
+//
 //        User alia = new User();
 //        alia.setUsername("alia");
-//        alia.setPassword(PasswordAuthentication.hashPassword("alia".toCharArray(), salt));
+//        alia.setPassword(passwordAuthentication.hashPassword("alia".toCharArray()));
 //        alia.setEmail("alia@gmail.com");
 //        alia.setBirthdate(new Date(2000, 1, 25));
 //        alia.setFullname("Миннегараева Алия Рустемовна");
@@ -41,7 +48,7 @@ public class ContextListener implements ServletContextListener,
 //
 //        User chulpan = new User();
 //        chulpan.setUsername("chulpan");
-//        chulpan.setPassword(PasswordAuthentication.hashPassword("chulpan".toCharArray(), salt));
+//        chulpan.setPassword(passwordAuthentication.hashPassword("chulpan".toCharArray()));
 //        chulpan.setEmail("chulpan@gmail.com");
 //        chulpan.setBirthdate(new Date(2001, 1, 1));
 //        chulpan.setFullname("Хайруллина  Чулпан Маратовна");
@@ -52,7 +59,7 @@ public class ContextListener implements ServletContextListener,
         final ServletContext servletContext = sce.getServletContext();
 
         servletContext.setAttribute("userDao", userDao);
-        servletContext.setAttribute("salt", salt);
+        servletContext.setAttribute("cost", cost);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
@@ -61,7 +68,6 @@ public class ContextListener implements ServletContextListener,
          Application Server shuts down.
       */
         userDao = null;
-        salt = new byte[16];
     }
 
     // -------------------------------------------------------

@@ -27,7 +27,6 @@ public class AuthorizationFilter implements Filter {
         final char[] password = req.getParameter("password1").toCharArray();
 
         final UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-        final byte[] salt = (byte[]) request.getServletContext().getAttribute("salt");
 
         final HttpSession session = request.getSession();
 
@@ -35,8 +34,9 @@ public class AuthorizationFilter implements Filter {
             response.sendRedirect(request.getContextPath());
         } else {
             User user = userDao.getUserByUsername(username);
-            //if (userDao.isUserExist(username, passwordHash)) {
-            if (user != null && PasswordAuthentication.verifyPassword(password, user.getPassword(), salt)) {
+            final int cost = (int) request.getServletContext().getAttribute("cost");
+            PasswordAuthentication passwordAuthentication = new PasswordAuthentication(cost);
+            if (user != null && passwordAuthentication.authenticate(password, user.getPassword())) {
                 LogIn.logIn(username, user.getPassword(), req, resp, request, response);
             } else {
                 request.getSession().setAttribute("check_password", false);
