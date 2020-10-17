@@ -28,7 +28,7 @@ public class ContextListener implements ServletContextListener,
 
         if (!aliaService.isUserExist("alia")) {
             try {
-                aliaService.enrollUser("alia", "alia".toCharArray(), "alia@gmail.com");
+                aliaService.enrollUser("alia", "aliaalia".toCharArray(), "alia@gmail.com");
             } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
                 dataIsEmpty.printStackTrace();
             }
@@ -37,7 +37,7 @@ public class ContextListener implements ServletContextListener,
         UserService chulpanService = new UserService();
         if (!chulpanService.isUserExist("chulpan")) {
             try {
-                chulpanService.enrollUser("chulpan", "chulpan".toCharArray(), "chulpan@gmail.com");
+                chulpanService.enrollUser("chulpan", "chulpanchulpan".toCharArray(), "chulpan@gmail.com");
             } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
                 dataIsEmpty.printStackTrace();
             }

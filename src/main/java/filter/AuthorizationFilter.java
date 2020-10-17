@@ -26,8 +26,8 @@ public class AuthorizationFilter implements Filter {
         if (CheckSession.check(session, request)) {
             response.sendRedirect("/fm/");
         } else {
-            final String username = req.getParameter("text");
-            final char[] password = req.getParameter("password1").toCharArray();
+            final String username = req.getParameter("username");
+            final char[] password = req.getParameter("password").toCharArray();
 
             UserService userService = new UserService();
 

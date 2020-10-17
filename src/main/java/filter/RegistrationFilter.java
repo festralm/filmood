@@ -27,8 +27,8 @@ public class RegistrationFilter implements Filter {
         final HttpServletResponse response = (HttpServletResponse) resp;
 
         final String username = req.getParameter("text");
-        final char[] password1 = req.getParameter("password1").toCharArray();
-        final char[] password2 = req.getParameter("password2").toCharArray();
+        final char[] password1 = req.getParameter("password").toCharArray();
+        final char[] password2 = req.getParameter("repeat_password").toCharArray();
         final String email = req.getParameter("email");
 
         if (!Arrays.equals(password1, password2)) {
@@ -40,7 +40,7 @@ public class RegistrationFilter implements Filter {
                 response.sendRedirect(request.getContextPath());
             } else {
                 UserService userService = new UserService();
-                if (!userService.isUserExist(username)) {
+                if (password1.length >= 8 && password1.length <= 32 && !userService.isUserExist(username)) {
                     try {
                         userService.enrollUser(username, password1, email);
                     } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
