@@ -32,7 +32,7 @@ public class ProfileServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/pages/Account.html").forward(request, response);
+            servletContext.getRequestDispatcher("/Account.html").forward(request, response);
 
             UserService userService = new UserService();
             String username = (String) session.getAttribute("username");
