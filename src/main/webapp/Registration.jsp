@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: katty
+  Date: 29.10.2020
+  Time: 18:58
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +64,16 @@
                        required/>
                 <label for="repeat_password">Повторите пароль</label>
 
-                <div class="requirements">
+                <div class="requirements" style="max-height:
+            <%
+                Object passwordsAreEqual = request.getSession().getAttribute("passwords");
+                if (passwordsAreEqual != null) {
+                    out.print("200px");
+                } else {
+                    out.print("0");
+                }
+                request.getSession().setAttribute("passwords", null);
+            %>">
                     Введённые пароли не совпадают
                 </div>
             </div>
@@ -68,7 +85,15 @@
             <p>
                 <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
             </p>
-
+            <%
+                Object loginExists = request.getSession().getAttribute("check_login");
+                if (loginExists != null) {
+                    out.print("200px");
+                } else {
+                    out.print("0");
+                }
+                request.getSession().setAttribute("check_login", null);
+            %>
         </form>
     </div>
 </div>

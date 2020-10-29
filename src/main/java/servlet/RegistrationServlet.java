@@ -1,37 +1,30 @@
-package filter;
+package servlet;
 
 import exception.CouldntAddData;
 import exception.DataIsEmpty;
-import exception.UsersPasswordIsNull;
 import service.UserService;
 import useful.CheckSession;
 import useful.LogIn;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 
-@WebFilter(filterName = "RegistrationFilter")
-public class RegistrationFilter implements Filter {
-    @Override
-    public void doFilter(final ServletRequest req,
-                         final ServletResponse resp,
-                         final FilterChain filterChain)
-            throws IOException, ServletException {
-
-        final HttpServletRequest request = (HttpServletRequest) req;
-        final HttpServletResponse response = (HttpServletResponse) resp;
-
-        final String username = req.getParameter("text");
-        final char[] password1 = req.getParameter("password").toCharArray();
-        final char[] password2 = req.getParameter("repeat_password").toCharArray();
-        final String email = req.getParameter("email");
+@WebServlet("/registerin")
+public class RegistrationServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String username = request.getParameter("username");
+        final char[] password1 = request.getParameter("password").toCharArray();
+        final char[] password2 = request.getParameter("repeat_password").toCharArray();
+        final String email = request.getParameter("email");
 
         if (!Arrays.equals(password1, password2)) {
+            request.getSession().setAttribute("passwords", false);
             response.sendRedirect("register");
         } else {
             final HttpSession session = request.getSession();
@@ -46,7 +39,7 @@ public class RegistrationFilter implements Filter {
                     } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
                         dataIsEmpty.printStackTrace();
                     }
-                    LogIn.logIn(username, req, request, response);
+                    LogIn.logIn(username, request, response);
                 } else {
                     request.getSession().setAttribute("check_login", false);
                     response.sendRedirect("register");
@@ -56,11 +49,7 @@ public class RegistrationFilter implements Filter {
         }
     }
 
-    @Override
-    public void destroy() {
-    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
     }
 }
