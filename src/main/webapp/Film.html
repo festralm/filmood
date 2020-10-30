@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильм</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/Film.css">
+</head>
+<body>
+<div class="menu" role="menu">
+    <div class="page_name" id="page_name">
+        <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
+    </div>
+
+    <nav>
+        <a href="http://localhost:8080/fm/authorize" id="myFilms">Моё кино</a> ||
+        <a href="http://localhost:8080/fm/authorize" id="favorites">Избранное</a> ||
+        <a href="http://localhost:8080/fm/authorize" id="selectedFilms">Буду смотреть</a> ||
+        <a href="pages/forFeature/Categories.html" id="categories">Категории</a> ||
+        <a href="http://localhost:8080/fm/authorize" id="account">Мой профиль</a>
+    </nav>
+</div>
+
+<div class="film" id="film">
+    <h1>Название фильма</h1>
+
+    <div class="photo" id="photo"></div>
+
+    <div class="info" id="info">
+        <p>Год, страна : . . .</p>
+        <p>Жанр : . . .</p>
+        <p>Краткое описание : . . .</p>
+
+        <input type="button" value="Смотреть прямо сейчас">
+        <input type="button" value="Сохранить на будущее">
+    </div>
+</div>
+
+<div class="other" id="other">
+    <form>
+        <p><b>Оставить комментарий к фильму :</b></p>
+        <p><textarea name="comment" id="comment"></textarea></p>
+        <p><input type="submit"></p>
+    </form>
+
+
+    <a href="#" id="allComments">Посмотреть другие комментарии</a>
+</div>
+
+<footer>
+    <p>Мы всегда готовы Вам помочь!</p>
+    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
+</footer>
+</body>
+</html>

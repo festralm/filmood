@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.page_name {
+    float: left;
+    padding: 0 0 10px 0;
+    margin-left: 10px;
+    font-weight: bold;
+
+}
+
+.page_name a {
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: 0;
+}
+
+.page_name a:hover {
+    display: table;
+    border: 0;
+    text-decoration: none;
+}
+
+.colortext {
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+p {
+    color: white;
+}
+.menu {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+a:hover {
+    text-decoration: #834FD0 underline;
+    color: white;
+    font-weight: bold;
+}
+
+footer {
+    color: ghostwhite;
+    background: #141414 79%; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+    flex: 0 0 auto;
+}
+
+.rec {
+    height: 900px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+    /*border: 0.5px solid #CCCCCC;*/
+    border-radius: 8px;
+    height: 240px;
+    width: 180px;
+
+    float: left; /*Задаем обтекание*/
+    line-height: 120px;/*Высота строки +  верт. центрирования текста*/
+    margin: 20px 20px 20px 50px;
+    text-align: center; /*Центрируем текст по горизонтали*/
+    display: table;
+    color: white;
+}
+
+.ph {
+    height: 240px;
+    width: 180px;
+    border-radius: 8px;
+    background: #CCCCCC;
+}
+
+
+
+
+
+
+
+/*a {*/
+/*    text-align: center;*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    text-transform: uppercase;*/
+/*}*/
+
+nav ul li {
+    display: inline-block;
+    padding: 10px 40px 10px 0;
+    cursor: pointer;
+    /*color: #804FD1;*/
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+nav ul li :hover {
+    font-weight: bold;
+    text-decoration: underline #804FD1;
+}
+
+.hide {
+    opacity: 1;
+    animation-name: a1;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes a1 {
+    to {
+        opacity: 0;
+        min-height: 0;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+}

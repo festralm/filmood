@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.page_name {
+    float: left;
+    padding: 0 0 10px 0;
+    margin-left: 10px;
+    font-weight: bold;
+
+}
+
+.page_name a {
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: 0;
+}
+
+.page_name a:hover {
+    display: table;
+    border: 0;
+    text-decoration: none;
+}
+
+.colortext {
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+
+.area1 {
+    height: 75vh;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    padding-bottom: 1px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    background: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    margin: 120px auto;
+    margin-bottom: 20px;
+
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    position: center;
+    padding-bottom: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    margin: 10px auto;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+    position: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+h5 {
+    color: white;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+h6 {
+    color: white;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #804FD1;
+    border-radius: 8px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.menu {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+a:hover {
+    text-decoration: #834FD0 underline;
+    color: white;
+    font-weight: bold;
+}
+
+.area2 {
+    height: 75vh;
+    margin-left: 250px;
+    margin-right: 250px;
+    text-align: center;
+    background: black;
+}
+
+p {
+    color: white;
+}
+
+footer {
+    color: ghostwhite;
+    background: #141414 79%; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+    flex: 0 0 auto;
+}
+
+form {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#search {
+    width: 812px;
+    height: 44px;
+    border-radius: 22px;
+    border: none; /* Убираем рамку */
+    outline: none; /* Убираем свечение в Chrome и Safari */
+    -webkit-appearance: none; /* Убираем рамку в Chrome и Safari */
+}
+
+input[type="submit"] {
+    width: 180px; /* Ширина кнопки */
+    height: 40px; /* Высота кнопки */
+    border: none; /* Убираем рамку */
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    border-radius: 8px;
+    color: white;
+    font-size: 24px;
+    margin: 60px;
+    outline: none; /* Убираем свечение в Chrome и Safari */
+    -webkit-appearance: none; /* Убираем рамку в Chrome и Safari */
+}
+
+input[type="button"] {
+    outline: none; /* Убираем свечение в Chrome и Safari */
+    -webkit-appearance: none; /* Убираем рамку в Chrome и Safari */
+    border: none; /* Убираем рамку */
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px 10px 15px;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+
+.film {
+    margin-top: 0;
+    height: 400px;
+    width: 300px;
+    margin-left: 50px;
+    margin-right: 80px;
+    float: left;
+}
+
+.ph {
+    height: 400px;
+    width: 300px;
+    border-radius: 8px;
+    background: #CCCCCC;
+}
+
+.info {
+    text-align: left;
+}
+
+.info > h3 {
+    text-align: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.new {
+    margin-top: 80px;
+}
+
+.tags {
+    text-align: center;
+}

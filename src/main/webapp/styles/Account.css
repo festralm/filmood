@@ -7,7 +7,7 @@
     font-weight: bold;
 }
 
-.page_name a{
+.page_name a {
     font-weight: bold;
     font-size: 24px;
     text-decoration: none;
@@ -16,7 +16,7 @@
     border: 0;
 }
 
-.page_name a:hover{
+.page_name a:hover {
     display: table;
     border: 0;
     text-decoration: none;
@@ -40,8 +40,18 @@ body {
 
 .avatar {
     height: 220px;
+    /*float: left;*/
+    margin-bottom: 20px;
+}
+
+.ph {
     float: left;
     margin: 40px 120px;
+    text-align: center;
+}
+
+.rimg {
+    padding-left: 20px;
 }
 
 input {
@@ -107,7 +117,7 @@ a {
     text-decoration: none; /* Убираем подчеркивание у ссылок */
 }
 
-a.reg{
+a.reg {
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -130,6 +140,7 @@ a.rimg {
     -webkit-text-fill-color: transparent;
     display: table;
     text-decoration: none;
+    text-align: center;
 }
 
 footer {
