@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="alia" id="1">
+        <createTable tableName="friend">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="user1_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user2_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="int" defaultValue="null"/>
+        </createTable>
+        <addUniqueConstraint
+                constraintName="friend-uc1-user1-user2"
+                tableName="friend"
+                columnNames="user1_id, user2_id"/>
+    </changeSet>
+    <changeSet id="2" author="alia">
+        <addForeignKeyConstraint
+                baseTableName="friend"
+                baseColumnNames="user1_id"
+                constraintName="friend-fk1-user1_id"
+                referencedTableName="user"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="friend"
+                baseColumnNames="user2_id"
+                constraintName="friend-fk2-user2_id"
+                referencedTableName="user"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

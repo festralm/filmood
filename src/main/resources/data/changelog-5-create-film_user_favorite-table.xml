@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="alia" id="1">
+        <createTable tableName="film_user_favorite">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="film_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint
+                constraintName="film_user_favorite-uc1-film_user"
+                tableName="film_user_favorite"
+                columnNames="film_id, user_id"/>
+        <addForeignKeyConstraint
+                baseTableName="film_user_favorite"
+                baseColumnNames="film_id"
+                constraintName="film_user_favorite-fk1-film_id"
+                referencedTableName="film"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="film_user_favorite"
+                baseColumnNames="user_id"
+                constraintName="film_user_favorite-fk2-user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

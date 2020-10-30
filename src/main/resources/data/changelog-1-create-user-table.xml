@@ -23,6 +23,7 @@
             </column>
             <column name="birthdate" type="date" defaultValue="null"/>
             <column name="fullname" type="varchar(150)" defaultValue="null"/>
+            <column name="photo_path" type="varchar(255)"/>
         </createTable>
     </changeSet>
     <changeSet id="2" author="alia">

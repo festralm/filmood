@@ -15,13 +15,13 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" type="text/css" href="styles/Film.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
+<%--<%--%>
+<%--    Object button = request.getSession().getAttribute("button");--%>
+<%--%>--%>
 
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<%--<jsp:include page="includes/menu.jsp">--%>
+<%--    <jsp:param name="button" value="<%=button%>"/>--%>
+<%--</jsp:include>--%>
 
 <div class="film" id="film">
     <h1>Название фильма</h1>

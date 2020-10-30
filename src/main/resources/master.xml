@@ -8,4 +8,15 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <include file="data/changelog-1-create-user-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-2-create-country-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-3-create-film-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-4-create-film_user_watched-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-5-create-film_user_favorite-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-6-create-genre-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-7-create-word-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-8-create-friend-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-9-create-film_genre-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-10-create-comment-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-11-create-film_word-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-12-create-film_country-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
