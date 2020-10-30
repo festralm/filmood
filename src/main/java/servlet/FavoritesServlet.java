@@ -22,10 +22,12 @@ public class FavoritesServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
+            session.setAttribute("button", "Выйти");
             String path = "/Favorites.jsp";
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);
         } else {
+            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

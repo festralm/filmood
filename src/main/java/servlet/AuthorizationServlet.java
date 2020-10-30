@@ -18,6 +18,7 @@ public class AuthorizationServlet extends HttpServlet {
         final HttpSession session = request.getSession();
 
         if (CheckSession.check(session, request)) {
+            session.setAttribute("button", "Выйти");
             response.sendRedirect("/fm/");
         } else {
             final String username = request.getParameter("username");
@@ -26,9 +27,10 @@ public class AuthorizationServlet extends HttpServlet {
             UserService userService = new UserService();
 
             if (userService.authenticateUser(username, password)) {
+                session.setAttribute("button", "Выйти");
                 LogIn.logIn(username, request, response);
             } else {
-
+                session.setAttribute("button", "Войти");
                 session.setAttribute("check_password", false);
                 response.sendRedirect("authorize");
             }

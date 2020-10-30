@@ -16,10 +16,12 @@ public class AuthorizeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (CheckSession.check(request.getSession(), request)) {
+        HttpSession session = request.getSession();
+        if (CheckSession.check(session, request)) {
+            session.setAttribute("button", "Выйти");
             response.sendRedirect(request.getContextPath());
         } else {
-            //request.setAttribute("check_password", true);
+            session.setAttribute("button", "Войти");
             String path = "/SignIn.jsp";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

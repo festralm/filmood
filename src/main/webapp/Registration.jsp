@@ -15,16 +15,13 @@
     <link rel="stylesheet" type="text/css" href="styles/Registration.css">
 </head>
 <body>
+<%
+    Object button = request.getSession().getAttribute("button");
+%>
 
-<div class="menu" role="menu">
-    <div class="page_name" id="page_name">
-        <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
-    </div>
-
-    <nav>
-        <jsp:include page="includes/menu.jsp"/>
-    </nav>
-</div>
+<jsp:include page="includes/menu.jsp">
+    <jsp:param name="button" value="<%=button%>"/>
+</jsp:include>
 
 <div class="form">
     <div class="authorization_form">

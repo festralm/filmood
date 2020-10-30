@@ -23,13 +23,15 @@ public class RegistrationServlet extends HttpServlet {
         final char[] password2 = request.getParameter("repeat_password").toCharArray();
         final String email = request.getParameter("email");
 
+        HttpSession session = request.getSession();
+
         if (!Arrays.equals(password1, password2)) {
+            session.setAttribute("button", "Выйти");
             request.getSession().setAttribute("passwords", false);
             response.sendRedirect("register");
         } else {
-            final HttpSession session = request.getSession();
-
             if (CheckSession.check(session, request)) {
+                session.setAttribute("button", "Выйти");
                 response.sendRedirect(request.getContextPath());
             } else {
                 UserService userService = new UserService();
@@ -39,11 +41,12 @@ public class RegistrationServlet extends HttpServlet {
                     } catch (DataIsEmpty | CouldntAddData dataIsEmpty) {
                         dataIsEmpty.printStackTrace();
                     }
+                    session.setAttribute("button", "Войти");
                     LogIn.logIn(username, request, response);
                 } else {
+                    session.setAttribute("button", "Выйти");
                     request.getSession().setAttribute("check_login", false);
                     response.sendRedirect("register");
-                    //req.getRequestDispatcher("jsp/temp_registration.jsp").forward(req, resp);
                 }
             }
         }

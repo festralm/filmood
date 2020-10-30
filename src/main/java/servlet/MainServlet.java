@@ -22,8 +22,10 @@ public class MainServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/helloPageForUser.jsp").forward(request, response);
+            session.setAttribute("button", "Выйти");
+            servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
         } else {
+            session.setAttribute("button", "Войти");
             servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
         }
     }

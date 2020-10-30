@@ -19,6 +19,12 @@ public class RecommendationsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (CheckSession.check(session, request)) {
+            session.setAttribute("button", "Выйти");
+        } else {
+            session.setAttribute("button", "Войти");
+        }
         String path = "/Recommendation.jsp";
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

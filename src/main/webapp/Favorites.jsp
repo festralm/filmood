@@ -1,4 +1,4 @@
-<%--
+`<%--
   Created by IntelliJ IDEA.
   User: katty
   Date: 29.10.2020
@@ -15,16 +15,13 @@
     <link rel="stylesheet" type="text/css" href="styles/Favorites.css">
 </head>
 <body>
-<div class="menu" role="menu">
-    <div class="page_name" id="page_name">
-        <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
-    </div>
+<%
+    Object button = request.getSession().getAttribute("button");
+%>
 
-    <nav>
-
-        <jsp:include page="includes/menu.jsp"/>
-    </nav>
-</div>
+<jsp:include page="includes/menu.jsp">
+    <jsp:param name="button" value="<%=button%>"/>
+</jsp:include>
 
 <div class="rec" id="rec">
     <h2>Ваши любимые фильмы</h2>
@@ -66,4 +63,4 @@
 </div>
 <jsp:include page="includes/footer.jsp"/>
 </body>
-</html>
+</html>`

@@ -16,9 +16,6 @@ public class CategoriesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String path = "/Associations.jsp";
-//        ServletContext servletContext = getServletContext();
-//        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
-//        requestDispatcher.forward(request, response);
+
     }
 }

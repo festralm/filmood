@@ -18,16 +18,13 @@
 <body>
 
 <div class="area1" id="area1">
-    <div class="menu" role="menu">
-        <div class="page_name" id="page_name">
-            <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
-        </div>
+    <%
+        Object buttonText = request.getSession().getAttribute("button");
+    %>
 
-        <nav>
-            <jsp:include page="includes/menu.jsp"/>
-            <a href="http://localhost:8080/fm/authorize" id="signIn">Войти</a>
-        </nav>
-    </div>
+    <jsp:include page="includes/menu.jsp">
+        <jsp:param name="button" value="<%=(String)buttonText%>"/>
+    </jsp:include>
 
     <header role="banner">
         <h1>Не просто смотри кино,</h1>

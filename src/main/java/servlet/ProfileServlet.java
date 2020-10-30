@@ -32,6 +32,7 @@ public class ProfileServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
+            session.setAttribute("button", "Выйти");
 
             UserService userService = new UserService();
             String username = (String) session.getAttribute("username");
@@ -45,6 +46,7 @@ public class ProfileServlet extends HttpServlet {
 
             servletContext.getRequestDispatcher("/Account.jsp").forward(request, response);
         } else {
+            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }
