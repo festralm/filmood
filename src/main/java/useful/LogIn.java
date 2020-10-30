@@ -18,7 +18,7 @@ public class LogIn {
         if (request.getParameter("check") == null) {
             cookie.setMaxAge(-1);
         } else {
-            cookie.setMaxAge(60 * 60 * 2);
+            cookie.setMaxAge(60 * 60 * 24);
         }
         response.addCookie(cookie);
         response.sendRedirect("/fm/");

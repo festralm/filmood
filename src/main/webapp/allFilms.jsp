@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: katty
+  Date: 29.10.2020
+  Time: 16:49
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +22,7 @@
     </div>
 
     <nav>
-        <a href="http://localhost:8080/fm/authorize" id="myFilms">Моё кино</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="favorites">Избранное</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="selectedFilms">Буду смотреть</a> ||
-        <a href="pages/forFeature/Categories.html" id="categories">Категории</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="account">Мой профиль</a>
+        <jsp:include page="includes/menu.jsp"/>
     </nav>
 </div>
 
@@ -36,44 +40,40 @@
     <div class="rec" id="rec">
         <div class="f1" id="f1">
             <div class="ph" id="ph1"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f2" id="f2">
             <div class="ph" id="ph2"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f3" id="f3">
             <div class="ph" id="ph3"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f4" id="f4">
             <div class="ph" id="ph4"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f5" id="f5">
             <div class="ph" id="ph5"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f6" id="f6">
             <div class="ph" id="ph6"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
 
         <div class="f7" id="f7">
             <div class="ph" id="ph7"></div>
-            <a href="Film.html">. . . </a>
+            <a href="Film.jsp">. . . </a>
         </div>
     </div>
 </div>
-
-<footer>
-    <p>Мы всегда готовы Вам помочь!</p>
-    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
-</footer>
+<jsp:include page="includes/footer.jsp"/>
 </body>
 </html>

@@ -1,3 +1,11 @@
+<%--
+Created by IntelliJ IDEA.
+User: katty
+Date: 29.10.2020
+Time: 16:49
+To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +21,7 @@
     </div>
 
     <nav>
-        <a href="http://localhost:8080/fm/authorize" id="myFilms">Моё кино</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="favorites">Избранное</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="selectedFilms">Буду смотреть</a> ||
-        <a href="pages/forFeature/Categories.html" id="categories">Категории</a> ||
-        <a href="http://localhost:8080/fm/authorize" id="account">Мой профиль</a>
+        <jsp:include page="includes/menu.jsp"/>
     </nav>
 </div>
 
@@ -45,10 +49,6 @@
 
     <a href="#" id="allComments">Посмотреть другие комментарии</a>
 </div>
-
-<footer>
-    <p>Мы всегда готовы Вам помочь!</p>
-    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
-</footer>
+<jsp:include page="includes/footer.jsp"/>
 </body>
 </html>

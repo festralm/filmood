@@ -21,11 +21,7 @@
     </div>
 
     <nav>
-        <a href="pages/forFeature/myFilms.html" id="myFilms">Моё кино</a> ||
-        <a href="pages/forFeature/Favorites.html" id="favorites">Избранное</a> ||
-        <a href="pages/forFeature/selectedFilms.html" id="selectedFilms">Буду смотреть</a> ||
-        <a href="pages/forFeature/Categories.html" id="categories">Категории</a> ||
-        <a href="http://localhost:8080/fm/profile" id="account">Мой профиль</a>
+        <jsp:include page="includes/menu.jsp"/>
     </nav>
 </div>
 
@@ -63,10 +59,6 @@
         </div>
     </form>
 </div>
-
-<footer>
-    <p>Мы всегда готовы Вам помочь!</p>
-    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
-</footer>
+<jsp:include page="includes/footer.jsp"/>
 </body>
 </html>

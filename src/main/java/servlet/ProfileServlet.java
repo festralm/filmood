@@ -21,9 +21,9 @@ public class ProfileServlet extends HttpServlet {
 //        final HttpSession session = request.getSession();
 //        ServletContext servletContext = getServletContext();
 //        if (CheckSession.check(session, request)) {
-//            servletContext.getRequestDispatcher("/pages/helloPageForUser.html").forward(request, response);
+//            servletContext.getRequestDispatcher("/pages/helloPageForUser.jsp").forward(request, response);
 //        } else {
-//            servletContext.getRequestDispatcher("/pages/helloPage.html").forward(request, response);
+//            servletContext.getRequestDispatcher("/pages/helloPage.jsp").forward(request, response);
 //        }
     }
 
@@ -44,11 +44,8 @@ public class ProfileServlet extends HttpServlet {
             request.setAttribute("birthdate", user.getBirthdate() == null ? "" : user.getBirthdate().toString());
 
             servletContext.getRequestDispatcher("/Account.jsp").forward(request, response);
-
-           // request.getRequestDispatcher("").forward(request, response);
-
         } else {
-            response.sendRedirect("/authorize");
+            response.sendRedirect("/fm/authorize");
         }
     }
 }

@@ -22,11 +22,7 @@
 
     <nav>
         <nav>
-            <a href="http://localhost:8080/fm/authorize" id="myFilms">Моё кино</a> ||
-            <a href="http://localhost:8080/fm/authorize" id="favorites">Избранное</a> ||
-            <a href="http://localhost:8080/fm/authorize" id="selectedFilms">Буду смотреть</a> ||
-            <a href="pages/forFeature/Categories.html" id="categories">Категории</a> ||
-            <a href="http://localhost:8080/fm/authorize" id="account">Мой профиль</a>
+            <jsp:include page="includes/menu.jsp"/>
         </nav>
     </nav>
 </div>
@@ -77,11 +73,6 @@
         </form>
     </div>
 </div>
-
-
-<footer>
-    <p>Мы всегда готовы Вам помочь!</p>
-    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
-</footer>
+<jsp:include page="includes/footer.jsp"/>
 </body>
 </html>

@@ -2,6 +2,7 @@ package servlet;
 
 import useful.CheckSession;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("")
-public class MainServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+@WebServlet("/recommendations")
+public class RecommendationsServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        final HttpSession session = request.getSession();
+        String path = "/Recommendation.jsp";
         ServletContext servletContext = getServletContext();
-        if (CheckSession.check(session, request)) {
-            servletContext.getRequestDispatcher("/helloPageForUser.jsp").forward(request, response);
-        } else {
-            servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
-        }
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+        requestDispatcher.forward(request, response);
     }
 }
