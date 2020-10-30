@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: katty
+  Date: 29.10.2020
+  Time: 16:49
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,26 +40,28 @@
 </div>
 
 <div class="box">
-    <h2>Имя и фамилия:</h2>
-    <input type="text" class="input" value="Абрамский Михаил">
+    <%--    <h2>Имя и фамилия:</h2>--%>
+    <%--    <input type="text" class="input" value="Абрамский Михаил">--%>
+    <form action="edit_profile" method="post">
+        <h2>Имя и фамилия:</h2>
+        <input name="fullname" type="text" class="input" value="${fullname}">
 
-    <h2>Имя пользователя: </h2>
-    <input type="text" class="input" value="@abramichael">
+        <h2>Имя пользователя: </h2>
+        <input name="username" type="text" class="input" value="${username}">
 
-    <h2>E-mail:</h2>
-    <input type="text" class="input" value="itis.example@gmail.com">
+        <h2>E-mail:</h2>
+        <input name="email" type="text" class="input" value="${email}">
 
-    <h2>Дата рождения:</h2>
-    <input type="text" class="input" value="31 Авг 19**">
+        <h2>Дата рождения:</h2>
+        <input name="birthdate" type="text" class="input" value="${birthdate}">
 
-    <h2>Пароль</h2>
-    <input type="password" class="input" value="iloveuitis">
+        <h2>Пароль</h2>
+        <input name="password" type="password" class="input" value="********">
 
-    <div class="button">
-        <button class="btn">Редактировать</button>
-    </div>
-
-
+        <div class="button">
+            <button class="btn">Редактировать</button>
+        </div>
+    </form>
 </div>
 
 <footer>

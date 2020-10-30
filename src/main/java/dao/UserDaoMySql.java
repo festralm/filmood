@@ -127,4 +127,29 @@ public class UserDaoMySql implements UserDao {
         }
         return false;
     }
+
+    @Override
+    public boolean editUser(int id, User newUser) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "update filmood.user set " +
+                    "username = ?, password = ?, email = ?, birthdate = ?, fullname = ? " +
+                    "where id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                preparedStatement.setString(1, newUser.getUsername());
+                preparedStatement.setString(2, newUser.getPassword());
+                preparedStatement.setString(3, newUser.getEmail());
+                preparedStatement.setDate(4, newUser.getBirthdate());
+                preparedStatement.setString(5, newUser.getFullname());
+                preparedStatement.setInt(6, id);
+
+                preparedStatement.executeUpdate();
+                return true;
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return false;
+    }
 }

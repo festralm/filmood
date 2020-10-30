@@ -17,4 +17,6 @@ public interface UserDao {
     boolean isUserExist(final String username, final String passwordHash);
 
     boolean isUsernameExist(final String username);
+
+    boolean editUser(int id, User newUser);
 }

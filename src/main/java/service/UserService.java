@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.regex.Matcher;
@@ -46,15 +47,63 @@ public class UserService {
     public boolean authenticateUser(String username, char[] password) {
         User user = userDao.getUserByUsername(username);
         return user != null &&
-                passwordAuthentication.hashPassword(password).equals(user.getPassword());
+                //passwordAuthentication.hashPassword(password).equals(user.getPassword());
+        passwordAuthentication.authenticate(password, user.getPassword());
     }
 
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
 
-    private static final class PasswordAuthentication
-    {
+    public boolean editUser(String oldUsername, String username, char[] password, String email,
+                            Date birthdate, String fullname) throws DataIsEmpty, CouldntAddData {
+        User user = getUserByUsername(oldUsername);
+        String oldPassword = user.getPassword();
+        String oldEmail = user.getEmail();
+        Date oldBirthdate = user.getBirthdate();
+        String oldFullname = user.getFullname();
+
+        User newUser = new User();
+
+        if (!username.equals("") && !username.equals(oldUsername)) {
+            newUser.setUsername(username);
+        } else {
+            newUser.setUsername(oldUsername);
+        }
+
+        if (!Arrays.equals(password, new char[]{}) && !Arrays.equals(password, "********".toCharArray()) && !passwordAuthentication.authenticate(password, oldPassword)) {
+            String passwordHash = passwordAuthentication.hashPassword(password);
+            newUser.setPassword(passwordHash);
+        } else {
+            newUser.setPassword(oldPassword);
+        }
+
+        if (!email.equals("") && !email.equals(oldEmail)) {
+            newUser.setEmail(email);
+        } else {
+            newUser.setEmail(oldEmail);
+        }
+
+        if (birthdate != null && !birthdate.equals(oldBirthdate)) {
+            newUser.setBirthdate(birthdate);
+        } else {
+            newUser.setBirthdate(oldBirthdate);
+        }
+
+        if (!fullname.equals("") && !fullname.equals(oldFullname)) {
+            newUser.setFullname(fullname);
+        } else {
+            newUser.setFullname(oldFullname);
+        }
+
+        if (!userDao.editUser(user.getId(), newUser)) {
+            throw new CouldntEditUser();
+        }
+
+        return true;
+    }
+
+    private static final class PasswordAuthentication {
         public static final String ID = "$31$";
         public static final int DEFAULT_COST = 16;
         private static final String ALGORITHM = "PBKDF2WithHmacSHA1";
@@ -95,17 +144,18 @@ public class UserService {
 
         public boolean authenticate(char[] password, String token)
         {
-            Matcher m = layout.matcher(token);
-            if (!m.matches())
-                throw new IllegalArgumentException("Invalid token format");
-            int iterations = iterations(Integer.parseInt(m.group(1)));
-            byte[] hash = Base64.getUrlDecoder().decode(m.group(2));
-            byte[] salt = Arrays.copyOfRange(hash, 0, SIZE / 8);
-            byte[] check = pbkdf2(password, salt, iterations);
-            int zero = 0;
-            for (int idx = 0; idx < check.length; ++idx)
-                zero |= hash[salt.length + idx] ^ check[idx];
-            return zero == 0;
+//            Matcher m = layout.matcher(token);
+//            if (!m.matches())
+//                throw new IllegalArgumentException("Invalid token format");
+//            int iterations = iterations(Integer.parseInt(m.group(1)));
+//            byte[] hash = Base64.getUrlDecoder().decode(m.group(2));
+//            byte[] salt = Arrays.copyOfRange(hash, 0, SIZE / 8);
+//            byte[] check = pbkdf2(password, salt, iterations);
+//            int zero = 0;
+//            for (int idx = 0; idx < check.length; ++idx)
+//                zero |= hash[salt.length + idx] ^ check[idx];
+//            return zero == 0;
+            return hashPassword(password).equals(token);
         }
 
         private static byte[] pbkdf2(char[] password, byte[] salt, int iterations)

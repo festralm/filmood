@@ -1,4 +1,4 @@
 package exception;
 
-public class CouldntAddData extends Exception {
+public class CouldntAddData extends MyException {
 }

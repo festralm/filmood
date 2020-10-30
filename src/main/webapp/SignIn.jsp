@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: katty
+  Date: 29.10.2020
+  Time: 18:18
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +48,15 @@
                 <input type="password" name="password" id="password" placeholder=" " minlength="8" maxlength="32" required/>
                 <label for="password">Введите пароль</label>
 
-                <div class="requirements">
+                <div class="requirements" style="max-height: <%
+                Object passwordIsTrue = request.getSession().getAttribute("check_password");
+                    if (passwordIsTrue != null) {
+                        out.print("200px");
+                    } else {
+                        out.print("0");
+                    }
+                request.getSession().setAttribute("check_password", null);
+                 %>">
                     Пароль неверный
                 </div>
             </div>

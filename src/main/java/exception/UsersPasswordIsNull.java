@@ -1,4 +1,4 @@
 package exception;
 
-public class UsersPasswordIsNull extends Exception {
+public class UsersPasswordIsNull extends MyException {
 }
