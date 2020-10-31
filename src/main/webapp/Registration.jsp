@@ -52,8 +52,7 @@
             </div>
 
             <div>
-                <input type="password" name="repeat_password" id="repeat_password" placeholder=" " minlength="8"
-                       maxlength="32"
+                <input type="password" name="repeat_password" id="repeat_password" placeholder=" "
                        required/>
                 <label for="repeat_password">Повторите пароль</label>
 
