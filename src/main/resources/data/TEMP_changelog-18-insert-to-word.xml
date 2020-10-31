@@ -1,0 +1,78 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="alia">
+        <insert tableName="word">
+            <column name="word" value="Бандиты"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Weapon"/>
+            <column name="count" value="9"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Прогулка по Питеру"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Убийства"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Хиппи"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Киноиндустрия"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Автомобили"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Боулинг"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Выпивка"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Ковер"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Похищение"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Кража"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Собака"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Страшный"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Кровавый"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Жуткий"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Атмосферный"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Пробирающий насквозь"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Мистический"/>
+            <column name="count" value="5"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Эпичный"/>
+            <column name="count" value="7"/>
+        </insert>
+        <insert tableName="word">
+            <column name="word" value="Интригующий"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

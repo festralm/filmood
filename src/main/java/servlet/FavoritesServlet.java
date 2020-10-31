@@ -1,5 +1,10 @@
 package servlet;
 
+import dto.Film;
+import dto.User;
+import service.FilmUserFavoriteService;
+import service.FilmUserWatchedService;
+import service.UserService;
 import useful.CheckSession;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +27,15 @@ public class FavoritesServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
+            UserService userService = new UserService();
+            String username = (String)session.getAttribute("username");
+
+            User user = userService.getUserByUsername(username);
+            int id = user.getId();
+            FilmUserFavoriteService filmUserFavoriteService = new FilmUserFavoriteService();
+            Film[] films = filmUserFavoriteService.getFilmsByUserId(id);
+            session.setAttribute("films", films);
+
             session.setAttribute("button", "Выйти");
             String path = "/Favorites.jsp";
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.UserDao;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +24,10 @@ public class CheckRegistrationFormServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        final UserDao dao = (UserDao) request.getServletContext().getAttribute("userDao");
+        UserService userService = new UserService();
 
         if (username != null) {
-            if (!dao.isUsernameExist(username)) {
+            if (!userService.isUserExist(username)) {
                 response.getWriter().write("true");
             } else {
                 response.getWriter().write("false");

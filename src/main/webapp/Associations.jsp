@@ -1,4 +1,4 @@
-<%--
+<%@ page import="dto.*" %><%--
   Created by IntelliJ IDEA.
   User: katty
   Date: 29.10.2020
@@ -27,9 +27,9 @@
     <h1>СЛОВА-АССОЦИАЦИИ</h1>
     <h3>Выберите подходящие тэги, чтобы найти тот самый фильм :) </h3>
 
-    <form>
+    <form method="post" action="search">
         <p>
-            <input type="search" name="search" id="search" placeholder="   #любовь,   #мелодрама,   #танцы">
+            <input type="search" name="search" id="search" placeholder="   #любовь,   #мелодрама,   #танцы" >
         </p>
 
         <div class="tags" id="tahgs">
@@ -46,7 +46,9 @@
         </p>
     </form>
 </div>
-
+<%
+    Object film = session.getAttribute("film");
+%>
 <div class="area2" id="area2">
     <div class="new" id="new">
         <div class="film" id="film">
@@ -54,14 +56,10 @@
             <!--        <h3> . . . </h3>-->
         </div>
 
-        <div class="info" id="info">
-            <a href="Film.jsp">Название фильма</a>
+        <jsp:include page="includes/film.jsp">
+            <jsp:param name="film" value="<%=film%>"/>
+        </jsp:include>
 
-            <p>Год, страна : . . .</p>
-            <p>Жанр : . . .</p>
-
-            <input type="button" value="Сохранить на будущее">
-        </div>
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>

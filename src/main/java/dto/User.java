@@ -46,7 +46,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
-                password == user.password &&
+                password.equals(user.password) &&
                 username.equals(user.username) &&
                 email.equals(user.email) &&
                 birthdate.equals(user.birthdate) &&

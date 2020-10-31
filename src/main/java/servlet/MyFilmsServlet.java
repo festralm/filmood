@@ -1,5 +1,11 @@
 package servlet;
 
+import dto.Film;
+import dto.User;
+import service.FilmUserFavoriteService;
+import service.FilmUserWatchedService;
+import service.FriendService;
+import service.UserService;
 import useful.CheckSession;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +28,15 @@ public class MyFilmsServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
+            UserService userService = new UserService();
+            String username = (String)session.getAttribute("username");
+
+            User user = userService.getUserByUsername(username);
+            int id = user.getId();
+            FilmUserWatchedService filmUserWatchedService = new FilmUserWatchedService();
+            Film[] films = filmUserWatchedService.getFilmsByUserId(id);
+            session.setAttribute("films", films);
+
             session.setAttribute("button", "Выйти");
             String path = "/MyMovies.jsp";
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

@@ -1,6 +1,8 @@
 package servlet;
 
-import useful.CheckSession;
+import dto.*;
+import service.*;
+import useful.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -22,6 +24,15 @@ public class WillWatchServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
+            UserService userService = new UserService();
+            String username = (String)session.getAttribute("username");
+
+            User user = userService.getUserByUsername(username);
+            int id = user.getId();
+            FilmUserWillWatchService filmUserWillWatchService = new FilmUserWillWatchService();
+            Film[] films = filmUserWillWatchService.getFilmsByUserId(id);
+            session.setAttribute("films", films);
+
             session.setAttribute("button", "Выйти");
             String path = "/willWatch.jsp";
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

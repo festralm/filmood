@@ -1,0 +1,78 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="alia">
+        <insert tableName="film">
+            <column name="name" value="Жмурки"/>
+            <column name="photo_path" value="/photos/film/1.jpg"/>
+            <column name="year" value="2005"/>
+            <column name="description" value="ЖмуркиЖмуркиЖмуркиЖмуркиЖмуркиЖмурки"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Брат"/>
+            <column name="photo_path" value="/photos/film/2.jpg"/>
+            <column name="year" value="1997"/>
+            <column name="description" value="БратБратБратБрат"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Однажды в Голливуде"/>
+            <column name="photo_path" value="/photos/film/3.jpg"/>
+            <column name="year" value="2019"/>
+            <column name="description" value="Однажды в ГолливудеОднажды в Голливуде"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Большой Лебовски"/>
+            <column name="photo_path" value="/photos/film/4.jpg"/>
+            <column name="year" value="1998"/>
+            <column name="description" value="Большой ЛебовскиБольшой ЛебовскиБольшой ЛебовскиБольшой Лебовски"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Джокер"/>
+            <column name="photo_path" value="/photos/film/5.jpg"/>
+            <column name="year" value="2019"/>
+            <column name="description" value="ДжокерДжокерДжокер"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Карты, деньги, два ствола"/>
+            <column name="photo_path" value="/photos/film/6.jpg"/>
+            <column name="year" value="1998"/>
+            <column name="description" value="Карты, деньги, два стволаКарты, деньги, два стволаКарты, деньги, два ствола"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Большой куш"/>
+            <column name="photo_path" value="/photos/film/7.jpg"/>
+            <column name="year" value="2000"/>
+            <column name="description" value="Большой кушБольшой кушБольшой куш"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Оно 2"/>
+            <column name="photo_path" value="/photos/film/8.jpg"/>
+            <column name="year" value="2019"/>
+            <column name="description" value="Оно 2Оно 2Оно 2"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Старикам тут не место"/>
+            <column name="photo_path" value="/photos/film/9.jpg"/>
+            <column name="year" value="2007"/>
+            <column name="description" value="Старикам тут не местоСтарикам тут не местоСтарикам тут не местоСтарикам тут не место"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Призрачный гонщик"/>
+            <column name="photo_path" value="/photos/film/10.jpg"/>
+            <column name="year" value="2007"/>
+            <column name="description" value="Призрачный гонщикПризрачный гонщикПризрачный гонщик"/>
+        </insert>
+        <insert tableName="film">
+            <column name="name" value="Оружейный барон"/>
+            <column name="photo_path" value="/photos/film/11.jpg"/>
+            <column name="year" value="2005"/>
+            <column name="description" value="Оружейный барон"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

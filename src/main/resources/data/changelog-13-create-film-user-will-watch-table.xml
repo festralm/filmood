@@ -8,7 +8,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <changeSet author="alia" id="1">
-        <createTable tableName="film_user_watched">
+        <createTable tableName="film_user_will_watch">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
@@ -20,19 +20,19 @@
             </column>
         </createTable>
         <addUniqueConstraint
-                constraintName="film_user_watched-uc1-film-user"
-                tableName="film_user_watched"
+                constraintName="film_user_will_watch-uc1-film_user"
+                tableName="film_user_will_watch"
                 columnNames="film_id, user_id"/>
         <addForeignKeyConstraint
-                baseTableName="film_user_watched"
+                baseTableName="film_user_will_watch"
                 baseColumnNames="film_id"
-                constraintName="film_user_watched-fk1-film_id"
+                constraintName="film_user_will_watch-fk1-film_id"
                 referencedTableName="film"
                 referencedColumnNames="id"/>
         <addForeignKeyConstraint
-                baseTableName="film_user_watched"
+                baseTableName="film_user_will_watch"
                 baseColumnNames="user_id"
-                constraintName="film_user_watched-fk2_user-id"
+                constraintName="film_user_will_watch-fk2-user_id"
                 referencedTableName="user"
                 referencedColumnNames="id"/>
     </changeSet>

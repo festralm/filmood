@@ -8,32 +8,32 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <changeSet author="alia" id="1">
-        <createTable tableName="film_word">
+        <createTable tableName="film_user_watched">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="film_id" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="word_id" type="int">
+            <column name="user_id" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <addUniqueConstraint
-                constraintName="film_word-uc1-film-word"
-                tableName="film_word"
-                columnNames="film_id, word_id"/>
+                constraintName="film_user_watched-uc1-film-user"
+                tableName="film_user_watched"
+                columnNames="film_id, user_id"/>
         <addForeignKeyConstraint
-                baseTableName="film_word"
+                baseTableName="film_user_watched"
                 baseColumnNames="film_id"
-                constraintName="film_word-fk1-film_id"
+                constraintName="film_user_watched-fk1-film_id"
                 referencedTableName="film"
                 referencedColumnNames="id"/>
         <addForeignKeyConstraint
-                baseTableName="film_word"
-                baseColumnNames="word_id"
-                constraintName="film_word-fk2-word_id"
-                referencedTableName="word"
+                baseTableName="film_user_watched"
+                baseColumnNames="user_id"
+                constraintName="film_user_watched-fk2-user_id"
+                referencedTableName="user"
                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

@@ -1,6 +1,6 @@
 package dao;
 
-import dto.User;
+import dto.*;
 
 public interface UserDao {
     User getUserById(int id);

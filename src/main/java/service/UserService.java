@@ -1,8 +1,7 @@
 package service;
 
-import dao.UserDao;
-import dao.UserDaoMySql;
-import dto.User;
+import dao.*;
+import dto.*;
 import exception.*;
 
 import javax.crypto.SecretKeyFactory;
@@ -14,7 +13,6 @@ import java.security.spec.KeySpec;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserService {
@@ -53,6 +51,9 @@ public class UserService {
 
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
+    }
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
     }
 
     public boolean editUser(String oldUsername, String username, char[] password, String email,

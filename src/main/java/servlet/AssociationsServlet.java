@@ -28,6 +28,7 @@ public class AssociationsServlet extends HttpServlet {
         } else {
             session.setAttribute("button", "Войти");
         }
+        request.setCharacterEncoding("UTF-8");
         requestDispatcher.forward(request, response);
     }
 }

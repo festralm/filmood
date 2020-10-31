@@ -1,6 +1,6 @@
 package dao;
 
-import dto.User;
+import dto.*;
 
 import java.sql.*;
 import java.util.logging.*;
@@ -11,6 +11,30 @@ public class UserDaoMySql implements UserDao {
 
     @Override
     public User getUserById(int id) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select id, username, password, email, birthdate, fullname " +
+                    "from filmood.user " +
+                    "where id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                preparedStatement.setInt(1, id);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    String username = resultSet.getString(2);
+                    String passwordHash = resultSet.getString(3);
+                    String email = resultSet.getString(4);
+                    Date birthdate = resultSet.getDate(5);
+                    String fullname = resultSet.getString(6);
+
+                    return new User(id, username, passwordHash, email, birthdate, fullname);
+                }
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
         return null;
     }
 
