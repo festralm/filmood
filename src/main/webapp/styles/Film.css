@@ -160,3 +160,48 @@ input[type="submit"], input[type="button"] {
     margin-right: 10px;
     margin-top: 30px;
 }
+
+.user_comment {
+    border: 1px solid #141414;
+    min-height: 70px;
+    width: 70%;
+    margin-left: 80px;
+    margin-right: 60px;
+    text-align: left;
+}
+
+#user_name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    text-align: left;
+    padding-bottom: 15px;
+   /*margin-top: 50px;*/
+}
+
+#user_name:hover {
+    text-decoration: #834FD0 underline;
+    color: white;
+    font-weight: bold;
+}
+
+.user_comment > p {
+    font-weight: normal;
+    font-size: 15px;
+    color: white;
+}
+
+.cm {
+    padding: 8px 20px;
+}
+
+.ph {
+    height: 50px;
+    width: 50px;
+    background: #d9d9d9;
+    border-radius: 8px;
+    float: left;
+   margin: 8px 20px;
+}

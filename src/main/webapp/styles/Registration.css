@@ -141,6 +141,10 @@ footer {
     background: white;
 }
 
+p {
+    color: white;
+}
+
 * {
     box-sizing: border-box;
 }

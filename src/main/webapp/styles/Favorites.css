@@ -139,19 +139,15 @@ footer {
     background: #CCCCCC;
 }
 
-
-
-
-
-
 a.rec {
     text-align: center;
     font-style: normal;
     font-weight: bolder;
     font-size: 24px;
     background-color: white;
-    margin-top: 1px;
-    margin-bottom: 1px;
+    /*margin-top: 1px;*/
+    /*margin-bottom: 1px;*/
+    line-height: 10px;
 }
 
 a.rec:hover{
@@ -160,6 +156,6 @@ a.rec:hover{
     font-weight: bolder;
     font-size: 28px;
     background-color: white;
-    margin-top: 1px;
-    margin-bottom: 1px;
+    /*margin-top: 1px;*/
+    /*margin-bottom: 1px;*/
 }

@@ -146,6 +146,10 @@ footer {
     box-sizing: border-box;
 }
 
+p {
+    color: white;
+}
+
 form > div {
     position: relative;
     background: black;

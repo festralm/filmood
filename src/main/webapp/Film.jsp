@@ -95,6 +95,16 @@ To change this template use File | Settings | File Templates.
 
     <a href="http://localhost:8080/fm/comments" id="allComments">Посмотреть другие комментарии</a>
 </div>
+
+<div class="user_comment" id="user_comment">
+    <div class="ph" id="ph">
+    </div>
+
+    <div class="cm" id="cm">
+        <a id="user_name" href="Profile.html">Имя пользователя</a>
+        <p>*комментарий комментарий комментарий комментарий комментарий*</p>
+    </div>
+</div>
 <jsp:include page="includes/footer.jsp"/>
 </body>
 </html>
