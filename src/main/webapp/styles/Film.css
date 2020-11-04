@@ -118,6 +118,14 @@ h1 {
     margin-right: 80px;
 }
 
+.photo_film {
+    width: 240px;
+    height: 320px;
+    background: #d9d9d9;
+    border-radius: 8px;
+    float: left;
+}
+
 .film {
     margin-left: 60px;
     margin-right: 60px;
@@ -293,5 +301,13 @@ input[type="submit"], input[type="button"] {
     background: #d9d9d9;
     border-radius: 8px;
     float: left;
-   margin: 8px 20px;
+    margin: 8px 20px;
+}
+
+.ph_user {
+    height: 50px;
+    width: 50px;
+    background: #d9d9d9;
+    border-radius: 8px;
+    float: left;
 }

@@ -32,8 +32,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    margin-left: 200px;
-    margin-right: 200px;
     padding: 0;
     background: black;
 }
@@ -179,5 +177,8 @@ input[type="checkbox"] {
     float: left;
 }
 
-
+.about_me {
+    margin-left: 200px;
+    margin-right: 200px;
+}
 
