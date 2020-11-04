@@ -1,18 +1,20 @@
 package service;
 
-import dao.*;
+import dao.implementation.WordDaoMySql;
+import dao.interfaces.WordDao;
 import dto.*;
 
 public class WordService {
     private WordDao wordDao = new WordDaoMySql();
 
-    public Word getWordByWord(String word) {
-        return wordDao.getWordByWord(word);
+    public String[] getAllWords() {
+        return wordDao.getAllWords();
     }
 
-    public Word getWordByWordId(int id) {
-
-        return wordDao.getWordByWordId(id);
+    public boolean isWordExist(String word) {
+        return wordDao.isWordExist(word
+                .replaceAll(" ", "")
+                .toLowerCase());
     }
 
 }

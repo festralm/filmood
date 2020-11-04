@@ -1,5 +1,6 @@
 package servlet;
 
+import service.WordService;
 import useful.CheckSession;
 
 import javax.servlet.RequestDispatcher;
@@ -23,11 +24,18 @@ public class AssociationsServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
         HttpSession session = request.getSession();
+
+        WordService wordService = new WordService();
+        response.setCharacterEncoding("UTF-8");
+
         if (CheckSession.check(session, request)) {
             session.setAttribute("button", "Выйти");
         } else {
             session.setAttribute("button", "Войти");
         }
+        String[] words = wordService.getAllWords();
+
+        session.setAttribute("words", words);
         request.setCharacterEncoding("UTF-8");
         requestDispatcher.forward(request, response);
     }

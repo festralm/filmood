@@ -13,6 +13,7 @@
     <title>Регистрация</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Registration.css">
+    <script src="js/validation.js"></script>
 </head>
 <body>
 <%
@@ -25,11 +26,15 @@
 
 <div class="form">
     <div class="authorization_form">
-        <form method="post" action="registerin">
+        <form method="post" action="register-in">
             <h1>Регистрация</h1>
             <div>
-                <input type="text" name="username" id="username" placeholder=" " required/>
+                <input type="text" onblur="check_username()" name="username" id="username" placeholder=" " required/>
                 <label for="username">Имя пользователя</label>
+
+                <div class="requirements" id="username_error">
+                    Имя пользователя занято
+                </div>
             </div>
 
             <div>
@@ -42,7 +47,7 @@
             </div>
 
             <div>
-                <input type="password" name="password" id="password" placeholder=" " minlength="8" maxlength="32"
+                <input type="password" onblur="check_passwords()" name="password" id="password" placeholder=" " minlength="8" maxlength="32"
                        required/>
                 <label for="password">Введите пароль</label>
 
@@ -52,20 +57,12 @@
             </div>
 
             <div>
-                <input type="password" name="repeat_password" id="repeat_password" placeholder=" "
+                <input type="password" onblur="check_passwords()" name="repeat_password"
+                       id="repeat_password" placeholder=" "
                        required/>
                 <label for="repeat_password">Повторите пароль</label>
 
-                <div class="requirements" style="max-height:
-            <%
-                Object passwordsAreEqual = request.getSession().getAttribute("passwords");
-                if (passwordsAreEqual != null) {
-                    out.print("200px");
-                } else {
-                    out.print("0");
-                }
-                request.getSession().setAttribute("passwords", null);
-            %>">
+                <div class="requirements" id="passwords_error">
                     Введённые пароли не совпадают
                 </div>
             </div>

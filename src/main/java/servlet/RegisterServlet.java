@@ -15,8 +15,6 @@ import java.util.logging.Logger;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-    private static Logger log = Logger.getLogger(RegisterServlet.class.getName());
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -28,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute("button", "Выйти");
             response.sendRedirect(request.getContextPath());
         } else {
-            session.setAttribute("button", "Выйти");
+            session.setAttribute("button", "Войти");
             String path = "/Registration.jsp";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);

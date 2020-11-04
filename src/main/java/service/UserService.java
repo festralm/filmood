@@ -1,6 +1,7 @@
 package service;
 
-import dao.*;
+import dao.implementation.UserDaoMySql;
+import dao.interfaces.UserDao;
 import dto.*;
 import exception.*;
 
@@ -20,88 +21,112 @@ public class UserService {
     private UserDao userDao = new UserDaoMySql();
     private PasswordAuthentication passwordAuthentication = new PasswordAuthentication();
 
-    public boolean enrollUser(String username, char[] password, String email) throws DataIsEmpty, CouldntAddData {
-        if (username == null ) {
-            throw new UsernameIsEmpty();
-        }
-        if (password == null ) {
-            throw new PasswordIsEmpty();
-        }
+//    public boolean enrollUser(String username, char[] password, String email) throws DataIsEmpty, CouldntAddData {
+//        if (username == null ) {
+//            throw new UsernameIsEmpty();
+//        }
+//        if (password == null ) {
+//            throw new PasswordIsEmpty();
+//        }
+//
+//        String passwordHash = passwordAuthentication.hashPassword(password);
+//        User user = new User(username, passwordHash, email);
+//
+//        if (!userDao.addUser(user)) {
+//            throw new CouldntAddUser();
+//        }
+//
+//        return true;
+//    }
+//
+//    public boolean isUserExist(String username) {
+//        return userDao.isUsernameExist(username);
+//    }
+//
+//    public boolean authenticateUser(String username, char[] password) {
+//        User user = userDao.getUserByUsername(username);
+//        return user != null &&
+//                //passwordAuthentication.hashPassword(password).equals(user.getPassword());
+//        passwordAuthentication.authenticate(password, user.getPassword());
+//    }
+//
+//    public User getUserByUsername(String username) {
+//        return userDao.getUserByUsername(username);
+//    }
+//    public User getUserById(int id) {
+//        return userDao.getUserById(id);
+//    }
+//
+//    public boolean editUser(String oldUsername, String username, char[] password, String email,
+//                            Date birthdate, String fullname) throws DataIsEmpty, CouldntAddData {
+//        User user = getUserByUsername(oldUsername);
+//        String oldPassword = user.getPassword();
+//        String oldEmail = user.getEmail();
+//        Date oldBirthdate = user.getBirthdate();
+//        String oldFullname = user.getFullname();
+//
+//        User newUser = new User();
+//
+//        if (!username.equals("") && !username.equals(oldUsername)) {
+//            newUser.setUsername(username);
+//        } else {
+//            newUser.setUsername(oldUsername);
+//        }
+//
+//        if (!Arrays.equals(password, new char[]{}) && !Arrays.equals(password, "********".toCharArray()) && !passwordAuthentication.authenticate(password, oldPassword)) {
+//            String passwordHash = passwordAuthentication.hashPassword(password);
+//            newUser.setPassword(passwordHash);
+//        } else {
+//            newUser.setPassword(oldPassword);
+//        }
+//
+//        if (!email.equals("") && !email.equals(oldEmail)) {
+//            newUser.setEmail(email);
+//        } else {
+//            newUser.setEmail(oldEmail);
+//        }
+//
+//        if (birthdate != null && !birthdate.equals(oldBirthdate)) {
+//            newUser.setBirthdate(birthdate);
+//        } else {
+//            newUser.setBirthdate(oldBirthdate);
+//        }
+//
+//        if (!fullname.equals("") && !fullname.equals(oldFullname)) {
+//            newUser.setFullname(fullname);
+//        } else {
+//            newUser.setFullname(oldFullname);
+//        }
+//
+//        if (!userDao.editUser(user.getId(), newUser)) {
+//            throw new CouldntEditUser();
+//        }
+//
+//        return true;
+//    }
 
-        String passwordHash = passwordAuthentication.hashPassword(password);
-        User user = new User(username, passwordHash, email);
+    public Film[] getWatchedFilmsByUserId(int userId) {
+        return userDao.getWatchedFilmsByUserId(userId);
+    }
 
-        if (!userDao.addUser(user)) {
-            throw new CouldntAddUser();
-        }
+    public Film[] getFavoriteFilmsByUserId(int userId) {
+        return userDao.getFavoriteFilmsByUserId(userId);
+    }
 
-        return true;
+    public Film[] getWillWatchFilmsByUserId(int userId) {
+        return userDao.getWillWatchFilmsByUserId(userId);
+    }
+
+    public User getUserByUserId(int userId) {
+        return userDao.getUserByUserId(userId);
+    }
+
+    public int getRandomFriendByUserId(int userId) {
+        return userDao.getRandomFriendByUserId(userId);
     }
 
     public boolean isUserExist(String username) {
-        return userDao.isUsernameExist(username);
-    }
-
-    public boolean authenticateUser(String username, char[] password) {
-        User user = userDao.getUserByUsername(username);
-        return user != null &&
-                //passwordAuthentication.hashPassword(password).equals(user.getPassword());
-        passwordAuthentication.authenticate(password, user.getPassword());
-    }
-
-    public User getUserByUsername(String username) {
-        return userDao.getUserByUsername(username);
-    }
-    public User getUserById(int id) {
-        return userDao.getUserById(id);
-    }
-
-    public boolean editUser(String oldUsername, String username, char[] password, String email,
-                            Date birthdate, String fullname) throws DataIsEmpty, CouldntAddData {
-        User user = getUserByUsername(oldUsername);
-        String oldPassword = user.getPassword();
-        String oldEmail = user.getEmail();
-        Date oldBirthdate = user.getBirthdate();
-        String oldFullname = user.getFullname();
-
-        User newUser = new User();
-
-        if (!username.equals("") && !username.equals(oldUsername)) {
-            newUser.setUsername(username);
-        } else {
-            newUser.setUsername(oldUsername);
-        }
-
-        if (!Arrays.equals(password, new char[]{}) && !Arrays.equals(password, "********".toCharArray()) && !passwordAuthentication.authenticate(password, oldPassword)) {
-            String passwordHash = passwordAuthentication.hashPassword(password);
-            newUser.setPassword(passwordHash);
-        } else {
-            newUser.setPassword(oldPassword);
-        }
-
-        if (!email.equals("") && !email.equals(oldEmail)) {
-            newUser.setEmail(email);
-        } else {
-            newUser.setEmail(oldEmail);
-        }
-
-        if (birthdate != null && !birthdate.equals(oldBirthdate)) {
-            newUser.setBirthdate(birthdate);
-        } else {
-            newUser.setBirthdate(oldBirthdate);
-        }
-
-        if (!fullname.equals("") && !fullname.equals(oldFullname)) {
-            newUser.setFullname(fullname);
-        } else {
-            newUser.setFullname(oldFullname);
-        }
-
-        if (!userDao.editUser(user.getId(), newUser)) {
-            throw new CouldntEditUser();
-        }
-
-        return true;
+        return userDao.isUserExist(username);
     }
 
     private static final class PasswordAuthentication {
@@ -145,17 +170,6 @@ public class UserService {
 
         public boolean authenticate(char[] password, String token)
         {
-//            Matcher m = layout.matcher(token);
-//            if (!m.matches())
-//                throw new IllegalArgumentException("Invalid token format");
-//            int iterations = iterations(Integer.parseInt(m.group(1)));
-//            byte[] hash = Base64.getUrlDecoder().decode(m.group(2));
-//            byte[] salt = Arrays.copyOfRange(hash, 0, SIZE / 8);
-//            byte[] check = pbkdf2(password, salt, iterations);
-//            int zero = 0;
-//            for (int idx = 0; idx < check.length; ++idx)
-//                zero |= hash[salt.length + idx] ^ check[idx];
-//            return zero == 0;
             return hashPassword(password).equals(token);
         }
 

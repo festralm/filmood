@@ -15,8 +15,8 @@
         <a href="http://localhost:8080/fm/my-films" id="myFilms">Моё кино</a> ||
         <a href="http://localhost:8080/fm/favorites" id="favorites">Избранное</a> ||
         <a href="http://localhost:8080/fm/will-watch" id="selectedFilms">Буду смотреть</a> ||
-        <a href="http://localhost:8080/fm/categories" id="categories">Категории</a> ||
-        <a href="http://localhost:8080/fm/profile" id="account">Мой профиль</a> ||
+        <a href="http://localhost:8080/fm/all-films" id="categories">Категории</a> ||
+        <a href="http://localhost:8080/fm/profile?id=0" id="account">Мой профиль</a> ||
         <%
             String buttonText = (String) session.getAttribute("button");
 

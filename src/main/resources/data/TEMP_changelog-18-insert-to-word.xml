@@ -9,70 +9,70 @@
 
     <changeSet id="1" author="alia">
         <insert tableName="word">
-            <column name="word" value="Бандиты"/>
+            <column name="word" value="бандиты"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Weapon"/>
+            <column name="word" value="weapon"/>
             <column name="count" value="9"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Прогулка по Питеру"/>
+            <column name="word" value="прогулка по питеру"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Убийства"/>
+            <column name="word" value="убийства"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Хиппи"/>
+            <column name="word" value="хиппи"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Киноиндустрия"/>
+            <column name="word" value="киноиндустрия"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Автомобили"/>
+            <column name="word" value="автомобили"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Боулинг"/>
+            <column name="word" value="боулинг"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Выпивка"/>
+            <column name="word" value="выпивка"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Ковер"/>
+            <column name="word" value="ковер"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Похищение"/>
+            <column name="word" value="похищение"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Кража"/>
+            <column name="word" value="кража"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Собака"/>
+            <column name="word" value="собака"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Страшный"/>
+            <column name="word" value="страшный"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Кровавый"/>
+            <column name="word" value="кровавый"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Жуткий"/>
+            <column name="word" value="жуткий"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Атмосферный"/>
+            <column name="word" value="атмосферный"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Пробирающий насквозь"/>
+            <column name="word" value="пробирающий насквозь"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Мистический"/>
+            <column name="word" value="мистический"/>
             <column name="count" value="5"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Эпичный"/>
+            <column name="word" value="эпичный"/>
             <column name="count" value="7"/>
         </insert>
         <insert tableName="word">
-            <column name="word" value="Интригующий"/>
+            <column name="word" value="интригующий"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

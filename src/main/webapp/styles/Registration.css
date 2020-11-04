@@ -136,6 +136,10 @@ footer {
     margin: 10px;
 }
 
+p {
+    color: white;
+}
+
 .check {
     color: white;
     background: white;

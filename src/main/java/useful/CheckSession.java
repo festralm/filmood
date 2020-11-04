@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 import static java.util.Objects.nonNull;
 
 public class CheckSession {
-    public static boolean check(HttpSession httpSession, HttpServletRequest request) {
-        if (nonNull(httpSession)) {
-            Object login = httpSession.getAttribute("username");
-            if (nonNull(login)) {
-                if (checkCookie(request, (String) login)) {
+    public static boolean check(HttpSession session, HttpServletRequest request) {
+        if (nonNull(session)) {
+            Object userId = session.getAttribute("user_id");
+            if (nonNull(userId)) {
+                if (checkCookie(request, (int) userId)) {
                     return true;
                 } else {
                     return false;
@@ -23,11 +23,12 @@ public class CheckSession {
         return false;
     }
 
-    private static boolean checkCookie(HttpServletRequest request, String login) {
+    private static boolean checkCookie(HttpServletRequest request, int userId) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             String cookieName = cookie.getName();
-            if (cookieName.equals("user") && cookie.getValue().equals(login)) {
+            if (cookieName.equals("userId") &&
+                    Integer.parseInt(cookie.getValue()) == userId) {
                 return true;
             }
         }

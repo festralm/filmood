@@ -1,6 +1,5 @@
 package servlet;
 
-import dao.UserDao;
 import dto.User;
 import service.UserService;
 import useful.CheckSession;
@@ -18,33 +17,33 @@ import java.io.IOException;
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        final HttpSession session = request.getSession();
-//        ServletContext servletContext = getServletContext();
-//        if (CheckSession.check(session, request)) {
-//            servletContext.getRequestDispatcher("/pages/helloPageForUser.jsp").forward(request, response);
-//        } else {
-//            servletContext.getRequestDispatcher("/pages/helloPage.jsp").forward(request, response);
-//        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
             session.setAttribute("button", "Выйти");
+            int profileId = (int) request.getAttribute("id");
 
             UserService userService = new UserService();
-            String username = (String) session.getAttribute("username");
+            int userId = (int) session.getAttribute("user_id");
 
-            User user = userService.getUserByUsername(username);
+            User user = userService.getUserByUserId(userId);
 
+            request.setAttribute("photo_path", user.getPhotoPath());
             request.setAttribute("fullname", user.getFullname());
-            request.setAttribute("username", username);
+            request.setAttribute("username", user.getUsername());
             request.setAttribute("email", user.getEmail());
             request.setAttribute("birthdate", user.getBirthdate() == null ? "" : user.getBirthdate().toString());
 
-            servletContext.getRequestDispatcher("/Account.jsp").forward(request, response);
+            if (profileId == 0) {
+                servletContext.getRequestDispatcher("/Account.jsp")
+                        .forward(request, response);
+            } else {
+                servletContext.getRequestDispatcher("/Profile.jsp")
+                        .forward(request, response);
+            }
         } else {
             session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");

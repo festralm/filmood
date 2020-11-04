@@ -1,21 +1,15 @@
 package service;
 
-import dao.*;
-import dto.*;
+
+import dao.implementation.FilmWordDaoMySql;
+import dao.interfaces.*;
 
 public class FilmWordService {
     private FilmWordDao filmWordDao = new FilmWordDaoMySql();
 
-    public Film getFilmByWord(String inputWord) {
-        WordService wordService = new WordService();
-
-        Word word = wordService.getWordByWord(inputWord);
-
-        int word_id = word.getId();
-
-        return filmWordDao.getFilmByWordId(word_id);
-    }
-    public Word[] getWordsByFilmId(int id) {
-        return filmWordDao.getWordsByFilmId(id);
+    public boolean addWordUserByIds(int filmId, String word) {
+        return filmWordDao.addWordUserByIds(filmId, word
+                .replaceAll(" ", "")
+                .toLowerCase());
     }
 }

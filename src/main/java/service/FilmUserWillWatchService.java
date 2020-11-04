@@ -1,16 +1,12 @@
 package service;
 
-import dao.*;
-import dto.*;
+import dao.interfaces.*;
+import dao.implementation.*;
 
 public class FilmUserWillWatchService {
     private FilmUserWillWatchDao filmUserWillWatchDao = new FilmUserWillWatchDaoMySql();
 
-
-    public Film[] getFilmsByUserId(int id) {
-        return filmUserWillWatchDao.getFilmsByUserId(id);
-    }
-    public boolean addFilmAndUser(int user_id, int film_id) {
-        return filmUserWillWatchDao.addFilmAndUser(user_id, film_id);
+    public boolean addFilmUserByIds(int filmId, int userId) {
+        return filmUserWillWatchDao.addFilmUserByIds(filmId, userId);
     }
 }

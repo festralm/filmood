@@ -26,7 +26,6 @@
 
 <div class="rec" id="rec">
     <h2>Ваши любимые фильмы</h2>
-
     <%
         Object film = session.getAttribute("films");
     %>

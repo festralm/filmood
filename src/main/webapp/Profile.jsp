@@ -10,7 +10,7 @@ To change this template use File | Settings | File Templates.
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль пользователя</title>
+    <title>${fullname}</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Profile.css">
 </head>
@@ -25,18 +25,18 @@ To change this template use File | Settings | File Templates.
 
 <div class="anketa" id="anketa">
     <div class="photo" id="photo">
-        <img src="https://sun1-24.userapi.com/Se9Kf-XIcLjI0hkHL7zIYMYV1fJtWk3omc6O4A/q2u4_QgJaG4.jpg" alt="Avatar" class="avatar">
+        <img src="${photo_path}" alt="Avatar" class="avatar">
     </div>
 
     <div class="info" id="info">
-        <h1>МИХАИЛ АБРАМСКИЙ</h1>
-        <h2>@abramichael</h2>
+        <h1>${fullname}</h1>
+        <h2>${username}</h2>
 
         <div class="categories" id="category">
             <h3>Любимые жанры:</h3>
-            <h4>Жанр 1</h4>
-            <h4>Жанр 2</h4>
-            <h4>Жанр 3</h4>
+            <h4>${favorite_genres[0]}</h4>
+            <h4>${favorite_genres[1]}</h4>
+            <h4>${favorite_genres[2]}</h4>
         </div>
         <h3></h3>
     </div>

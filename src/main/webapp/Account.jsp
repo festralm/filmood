@@ -25,11 +25,11 @@
 
 <div class="ph" id="ph">
     <div class="photo" id="photo">
-        <img src="https://sun1-24.userapi.com/Se9Kf-XIcLjI0hkHL7zIYMYV1fJtWk3omc6O4A/q2u4_QgJaG4.jpg" alt="Avatar" class="avatar">
+        <img src="${photo_path}" alt="Avatar" class="avatar">
     </div>
 
     <div class="refactorImg">
-        <a class="rimg" href="Refactor.html">Сменить фото профиля</a>
+        <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
     </div>
 </div>
 

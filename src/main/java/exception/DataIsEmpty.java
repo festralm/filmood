@@ -1,4 +1,4 @@
-package exception;
-
-public class DataIsEmpty extends MyException {
-}
+//package exception;
+//
+//public class DataIsEmpty extends MyException {
+//}

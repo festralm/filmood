@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+
+    <link rel="stylesheet" type="text/css" href="../styles/Account.css">
+</head>
+<body>
+<div class="menu" role="menu">
+    <div class="page_name" id="page_name">
+        <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
+    </div>
+
+    <nav>
+        <a href="http://localhost:8080/fm/my-films" id="myFilms">Моё кино</a> ||
+        <a href="http://localhost:8080/fm/favorites" id="favorites">Избранное</a> ||
+        <a href="http://localhost:8080/fm/will-watch" id="selectedFilms">Буду смотреть</a> ||
+        <a href="http://localhost:8080/fm/categories" id="categories">Категории</a> ||
+        <a href="http://localhost:8080/fm/profile" id="account">Мой профиль</a> ||
+        <a href="http://localhost:8080/fm/authorize" id="signIn">Войти/Выйти</a>
+
+    </nav>
+</div>
+<div class="ph" id="ph">
+    <div class="photo" id="photo">
+        <img src="../photo/user/1.jpg" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="refactorImg">
+        <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
+    </div>
+</div>
+
+<div class="box">
+    <form action="edit_profile" method="post">
+        <h2>Имя и фамилия:</h2>
+        <input name="fullname" type="text" class="input" value="${fullname}">
+
+        <h2>Имя пользователя: </h2>
+        <input name="username" type="text" class="input" value="${username}">
+
+        <h2>E-mail:</h2>
+        <input name="email" type="text" class="input" value="${email}">
+
+        <h2>Дата рождения:</h2>
+        <input name="birthdate" type="text" class="input" value="${birthdate}">
+
+        <h2>Пароль</h2>
+        <input name="password" type="password" class="input" value="********">
+
+        <div class="button">
+            <button class="btn">Редактировать</button>
+        </div>
+    </form>
+</div>
+<footer>
+    <p>Мы всегда готовы Вам помочь!</p>
+    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
+</footer>
+
+</body>
+</html>

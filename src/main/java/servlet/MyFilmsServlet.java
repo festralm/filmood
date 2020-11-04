@@ -1,12 +1,8 @@
 package servlet;
 
-import dto.Film;
-import dto.User;
-import service.FilmUserFavoriteService;
-import service.FilmUserWatchedService;
-import service.FriendService;
-import service.UserService;
-import useful.CheckSession;
+import dto.*;
+import service.*;
+import useful.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -29,13 +25,11 @@ public class MyFilmsServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
             UserService userService = new UserService();
-            String username = (String)session.getAttribute("username");
+            int userId = (int)session.getAttribute("user_id");
 
-            User user = userService.getUserByUsername(username);
-            int id = user.getId();
-            FilmUserWatchedService filmUserWatchedService = new FilmUserWatchedService();
-            Film[] films = filmUserWatchedService.getFilmsByUserId(id);
-            session.setAttribute("films", films);
+            Film[] watchedFilms = userService.getWatchedFilmsByUserId(userId);
+
+            session.setAttribute("films", watchedFilms);
 
             session.setAttribute("button", "Выйти");
             String path = "/MyMovies.jsp";

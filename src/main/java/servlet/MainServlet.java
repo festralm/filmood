@@ -18,15 +18,13 @@ public class MainServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         final HttpSession session = request.getSession();
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
             session.setAttribute("button", "Выйти");
-            servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
         } else {
             session.setAttribute("button", "Войти");
-            servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
         }
+        servletContext.getRequestDispatcher("/helloPage.jsp").forward(request, response);
     }
 }

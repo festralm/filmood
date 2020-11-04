@@ -13,6 +13,8 @@
     <title>Ассоциации</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Associations.css">
+    <script src="js/validation.js"></script>
+    <script src="js/popup.js"></script>
 </head>
 <body>
 <%
@@ -29,20 +31,27 @@
 
     <form method="post" action="search">
         <p>
-            <input type="search" name="search" id="search" placeholder="   #любовь,   #мелодрама,   #танцы" >
+            <input oninput="check_word()" type="search" name="search"
+                   id="search" placeholder="   #любовь,   #мелодрама,   #танцы" >
         </p>
 
         <div class="tags" id="tahgs">
             <h5>Популярные запросы :</h5>
 
-            <h6>#любовь</h6>
-            <h6>#свобода</h6>
-            <h6>#комедия</h6>
-            <h6>#семья</h6>
+            <%
+                Object wordsObj = request.getSession().getAttribute("words");
+
+                if (wordsObj != null) {
+                    String[] words = (String[]) wordsObj;
+                    for (int i = 0; i < Math.min(words.length, 4); i++) {
+                        out.print("<h6>#" + words[i] + "</h6>");
+                    }
+                }
+            %>
         </div>
 
         <p>
-            <input type="submit" value="Найти" id="submitButton">
+            <input type="submit" value="Найти" id="submit" disabled>
         </p>
     </form>
 </div>
@@ -51,11 +60,6 @@
 %>
 <div class="area2" id="area2">
     <div class="new" id="new">
-        <div class="film" id="film">
-            <div class="ph" id="ph1"></div>
-            <!--        <h3> . . . </h3>-->
-        </div>
-
         <jsp:include page="includes/film.jsp">
             <jsp:param name="film" value="<%=film%>"/>
         </jsp:include>
@@ -63,5 +67,10 @@
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>
+<jsp:include page="describe_popup.jsp"/>
+
+<%
+    request.getSession().setAttribute("film", null);
+%>
 </body>
 </html>

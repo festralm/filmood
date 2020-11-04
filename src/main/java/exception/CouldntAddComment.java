@@ -1,4 +1,4 @@
-package exception;
-
-public class CouldntAddComment extends CouldntAddData {
-}
+//package exception;
+//
+//public class CouldntAddComment extends CouldntAddData {
+//}

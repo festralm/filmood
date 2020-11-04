@@ -1,4 +1,4 @@
-package exception;
-
-public class PasswordIsEmpty extends DataIsEmpty {
-}
+//package exception;
+//
+//public class PasswordIsEmpty extends DataIsEmpty {
+//}

@@ -24,17 +24,12 @@ public class RecommendationsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (CheckSession.check(session, request)) {
             UserService userService = new UserService();
-            String username = (String)session.getAttribute("username");
+            int userId = (int) session.getAttribute("user_id");
 
-            User user = userService.getUserByUsername(username);
-            int id = user.getId();
-            FriendService friendService = new FriendService();
+            int friendId = userService.getRandomFriendByUserId(userId);
 
-            User friend = friendService.getFriendByUserId(id);
-            int friendsId = friend.getId();
+            Film[] films = userService.getFavoriteFilmsByUserId(friendId);
 
-            FilmUserFavoriteService filmUserFavoriteService = new FilmUserFavoriteService();
-            Film[] films = filmUserFavoriteService.getFilmsByUserId(friendsId, 10);
             session.setAttribute("films", films);
 
             session.setAttribute("button", "Выйти");

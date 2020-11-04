@@ -25,13 +25,11 @@ public class WillWatchServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         if (CheckSession.check(session, request)) {
             UserService userService = new UserService();
-            String username = (String)session.getAttribute("username");
+            int userId = (int)session.getAttribute("user_id");
 
-            User user = userService.getUserByUsername(username);
-            int id = user.getId();
-            FilmUserWillWatchService filmUserWillWatchService = new FilmUserWillWatchService();
-            Film[] films = filmUserWillWatchService.getFilmsByUserId(id);
-            session.setAttribute("films", films);
+            Film[] willWatchFilms = userService.getWillWatchFilmsByUserId(userId);
+
+            session.setAttribute("films", willWatchFilms);
 
             session.setAttribute("button", "Выйти");
             String path = "/willWatch.jsp";

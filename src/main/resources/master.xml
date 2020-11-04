@@ -7,26 +7,54 @@
                    http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <include file="data/changelog-1-create-user-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-2-create-country-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-3-create-film-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-4-create-film-user-watched-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-5-create-film-user-favorite-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-6-create-genre-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-7-create-word-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-8-create-friend-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-9-create-film-genre-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-10-create-comment-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-11-create-film-word-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-12-create-film-country-table.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-13-insert-to-country.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-14-insert-to-film.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-15-insert-to-film-country.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-16-insert-to-genre.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-17-insert-to-film-genre.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-18-insert-to-word.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-19-insert-to-film-word.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-20-insert-to-friend.xml" relativeToChangelogFile="true"/>
-    <include file="data/TEMP_changelog-21-insert-to-film-user-favorite.xml" relativeToChangelogFile="true"/>
-    <include file="data/changelog-13-create-film-user-will-watch-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/changelog-1-create-user-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-2-create-country-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-3-create-film-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-4-create-film-user-watched-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-5-create-film-user-favorite-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-6-create-genre-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-7-create-word-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-8-create-friend-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-9-create-film-genre-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-10-create-comment-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-11-create-film-word-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-12-create-film-country-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-13-insert-to-country.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-14-insert-to-film.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-15-insert-to-film-country.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-16-insert-to-genre.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-17-insert-to-film-genre.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-18-insert-to-word.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-19-insert-to-film-word.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-20-insert-to-friend.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/TEMP_changelog-21-insert-to-film-user-favorite.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-13-create-film-user-will-watch-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-14-update-film-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-15-update-country-table.xml"
+             relativeToChangelogFile="true"/>
+    <include file="data/changelog-16-update-word-table.xml"
+             relativeToChangelogFile="true"/>
 </databaseChangeLog>
