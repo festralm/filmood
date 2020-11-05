@@ -39,6 +39,8 @@ To change this template use File | Settings | File Templates.
             <h4>${favorite_genres[2]}</h4>
         </div>
         <h3></h3>
+
+        <button
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>

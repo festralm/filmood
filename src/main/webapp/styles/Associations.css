@@ -134,6 +134,16 @@ a:hover {
     margin-right: 250px;
     text-align: center;
     background: black;
+    display: none;
+}
+
+.area2:hover {
+    height: 75vh;
+    margin-left: 250px;
+    margin-right: 250px;
+    text-align: center;
+    background: black;
+    display: block;
 }
 
 p {
