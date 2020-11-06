@@ -321,3 +321,63 @@ input[type="button"] {
     -webkit-appearance: none; /* Убираем рамку в Chrome и Safari */
     text-align: center;
 }
+
+.popup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    /*opacity: 0;*/
+    /*visibility: hidden;*/
+}
+
+.popup:target {
+    opacity: 1;
+    /*visibility: visible;*/
+}
+
+.popup_body {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.popup_content {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    max-width: 800px;
+    padding: 30px;
+    position: relative;
+    border: 2px solid #804FD1;
+}
+
+.popup_close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.popup_text > h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size:24px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.popup_title {
+    font-size: 40px;
+    margin: 0 0 1em 0;
+}

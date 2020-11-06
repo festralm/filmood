@@ -66,6 +66,24 @@ a:hover {
     font-weight: bold;
 }
 
+.a_for_film {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    line-height: normal;
+}
+
+.a_for_film:hover {
+    text-decoration: #834FD0 underline;
+    color: white;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 16px;
+    line-height: normal;
+}
+
 footer {
     color: ghostwhite;
     background: #141414 79%; /* Цвет фона */
@@ -79,16 +97,19 @@ footer {
     margin-right: 50px;
 }
 
-.f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+.f1-thrillers, .f1-comedies, .f1-melodramas, .f1-dramas {
     /*border: 0.5px solid #CCCCCC;*/
     border-radius: 8px;
+    /*height: 240px;*/
+    /*width: 180px;*/
+
     height: 240px;
-    width: 180px;
+    width: 240px;
 
     float: left; /*Задаем обтекание*/
     line-height: 120px;/*Высота строки +  верт. центрирования текста*/
-    margin: 20px 20px 20px 50px;
-    text-align: center; /*Центрируем текст по горизонтали*/
+    margin: 20px 10px 20px 20px;
+    text-align: left; /*Центрируем текст по горизонтали*/
     display: table;
     color: white;
 }

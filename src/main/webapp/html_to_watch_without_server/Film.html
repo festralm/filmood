@@ -34,18 +34,16 @@
         <p>Краткое описание : Неизвестное описание</p>
 
         <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-wanted';">
+        <input class="button4" type="button" id="b4" onclick="window.location.href = '#popup2';" value="Я смотрел!"/>
     </div>
 </div>
 
 <div class="other" id="other">
     <form>
         <p><b>Оставить комментарий к фильму :</b></p>
-        <p><textarea name="comment" id="comment"></textarea></p>
+        <p><textarea name="comment" id="comment" required></textarea></p>
         <p><input type="submit"></p>
     </form>
-
-
-    <a href="http://localhost:8080/fm/comments" id="allComments">Посмотреть другие комментарии</a>
 </div>
 
 <div class="user_comment" id="user_comment">

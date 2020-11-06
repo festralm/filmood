@@ -13,7 +13,7 @@
     <title>Категории</title>
 
     <link rel="stylesheet" type="text/css" href="styles/allFilms.css">
-    <script src="filtr.js"></script>
+    <script src="js/filter.js"></script>
 </head>
 <body>
 <%
