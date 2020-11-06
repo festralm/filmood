@@ -30,6 +30,7 @@ function check_passwords() {
     }
 
 }
+
 function check_word() {
     const word = document.getElementById("search").value;
     const xhr = new XMLHttpRequest();
