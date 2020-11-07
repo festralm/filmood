@@ -41,16 +41,18 @@
         </div>
 
         <p>
-            <input type="submit" value="Найти" id="submit"
-                   onclick="window.location.href = '#area2';" disabled>
+            <input type="submit" value="Найти" id="submit" disabled>
+            <%--                   onclick="window.location.href = '#area2';" >--%>
         </p>
     </form>
 </div>
-<div class="area2" id="area2">
-    <div class="new" id="new">
-        <jsp:include page="includes/film.jsp"/>
+<c:if test="${film != null}">
+    <div class="area2" id="area2">
+        <div class="new" id="new">
+            <jsp:include page="includes/film.jsp"/>
+        </div>
     </div>
-</div>
+</c:if>
 <jsp:include page="includes/footer.jsp"/>
 <jsp:include page="includes/describe_popup.jsp"/>
 </body>
