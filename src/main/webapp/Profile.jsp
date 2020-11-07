@@ -15,13 +15,7 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" type="text/css" href="styles/Profile.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="anketa" id="anketa">
     <div class="photo" id="photo">

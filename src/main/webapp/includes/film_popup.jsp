@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="../js/popup.js"></script>
 <div id="popup" class="popup">
     <div class="popup_body">
         <div class="popup_content">
@@ -13,13 +14,7 @@
             <div class="popup_title">Итааак ... сегодня смотрим фильм</div>
             <div class="popup_text">
                 <div class="new" id="new">
-                    <%
-                        Object film = session.getAttribute("film");
-                    %>
-
-                    <jsp:include page="includes/film.jsp">
-                        <jsp:param name="film" value="<%=film%>"/>
-                    </jsp:include>
+                    <jsp:include page="film.jsp"/>
                 </div>
             </div>
         </div>

@@ -24,13 +24,24 @@ public class User {
         this.email = email;
     }
 
-    public User(int id, String username, String email,
+    public User(int id, String username, String passwordHash, String email,
                 Date birthdate, String fullname, String photoPath) {
         this.id = id;
         this.username = username;
+        this.password = passwordHash;
         this.email = email;
         this.birthdate = birthdate;
         this.fullname = fullname;
         this.photoPath = photoPath;
+    }
+
+    public User(int id, String username, String password,
+                String email, Date birthdate, String fullname) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.fullname = fullname;
     }
 }

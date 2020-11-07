@@ -6,59 +6,69 @@ import dto.*;
 import service.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 public class FilmWordDaoMySql implements FilmWordDao {
     private final MySqlConnection connection = new MySqlConnection();
 
     @Override
-    public boolean addWordUserByIds(int filmId, String word) {
+    public FilmWord getFilmWordByFilmIdAndWordId(int filmId, int wordId) {
         try (Connection con = connection.getNewConnection()) {
-            String sql = "select film_word.id, word.id, film_word.count, word.count " +
+            String sql = "select id, count " +
                     "from film_word " +
-                    "inner join word " +
-                    "on film_word.word_id = word.id " +
-                    "where film.id = ? and word.name = ?";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                    "where film_word.film_id = ? and film_word.word_id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.setInt(1, filmId);
-                preparedStatement.setString(2, word);
+                preparedStatement.setInt(2, wordId);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 int filmWordId = resultSet.getInt(1);
-                int wordId = resultSet.getInt(2);
-                int filmWordCount = resultSet.getInt(3);
-                int wordCount = resultSet.getInt(4);
+                int filmWordCount = resultSet.getInt(2);
 
-                if (resultSet.next()) {
-                    String sql1 = "update film_word " +
-                            "set count = ? " +
-                            "where id = ?";
-                    PreparedStatement preparedStatement1 = con.prepareStatement(sql1);
-                    preparedStatement1.setInt(1, filmWordCount + 1);
-                    preparedStatement1.setInt(2, filmWordId);
+                FilmWord filmWord = new FilmWord(filmWordId, filmId, wordId, filmWordCount);
+                return filmWord;
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
 
-                    preparedStatement1.executeQuery();
-                    String sql2 = "update word " +
-                            "set count = ? " +
-                            "where id = ?";
-                    PreparedStatement preparedStatement2 = con.prepareStatement(sql2);
-                    preparedStatement2.setInt(1, wordCount + 1);
-                    preparedStatement2.setInt(2, wordId);
+    @Override
+    public boolean incrementCount(int filmWordId, int filmWordCount) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "update film_word " +
+                    "set count = ? " +
+                    "where id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setInt(1, filmWordCount + 1);
+                preparedStatement.setInt(2, filmWordId);
 
-                    preparedStatement2.executeQuery();
+                preparedStatement.executeUpdate();
+            }
 
-                } else {
-                    String sql3 = "insert into film_word " +
-                            "values(?, ?, 1)";
-                    PreparedStatement preparedStatement3 = con.prepareStatement(sql3);
-                    preparedStatement3.setInt(1, filmId);
-                    preparedStatement3.setString(2, word);
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return false;
+    }
 
-                    preparedStatement3.executeQuery();
-                }
+    @Override
+    public boolean addNewFilmWord(int filmId, int wordId) {
+        try (Connection con = connection.getNewConnection()) {
+
+            String sql = "insert into film_word " +
+                    "(film_id, word_id, count) " +
+                    "values(?, ?, 1)";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setInt(1, filmId);
+                preparedStatement.setInt(2, wordId);
+
+                preparedStatement.executeUpdate();
             }
         }
         catch (SQLException exception) {
@@ -67,4 +77,27 @@ public class FilmWordDaoMySql implements FilmWordDao {
         }
         return false;
     }
+
+    @Override
+    public boolean addWordUserByIds(int filmId, String word) {
+        try (Connection con = connection.getNewConnection()) {
+            WordService wordService = new WordService();
+            Word wordObj = wordService.getWordByName(word);
+            wordService.incrementCount(wordObj.getId(), wordObj.getCount());
+
+            FilmWord filmWord = getFilmWordByFilmIdAndWordId(filmId, wordObj.getId());
+            if (filmWord != null) {
+                incrementCount(filmWord.getId(), filmWord.getCount());
+            } else {
+                addNewFilmWord(filmId, wordObj.getId());
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

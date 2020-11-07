@@ -2,7 +2,7 @@ package servlet;
 
 import dto.User;
 import service.UserService;
-import useful.CheckSession;
+import useful.Cookies;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,24 +19,25 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final HttpSession session = request.getSession();
-        ServletContext servletContext = getServletContext();
-        if (CheckSession.check(session, request)) {
-            session.setAttribute("button", "Выйти");
-            int profileId = (int) request.getAttribute("id");
-
-            UserService userService = new UserService();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (Cookies.checkCookie(request)) {
+            final HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("user_id");
 
+            UserService userService = new UserService();
+            int profileId = Integer.parseInt(request.getParameter("id"));
             User user = userService.getUserByUserId(userId);
 
             request.setAttribute("photo_path", user.getPhotoPath());
             request.setAttribute("fullname", user.getFullname());
             request.setAttribute("username", user.getUsername());
             request.setAttribute("email", user.getEmail());
-            request.setAttribute("birthdate", user.getBirthdate() == null ? "" : user.getBirthdate().toString());
+            request.setAttribute("birthdate", user.getBirthdate() == null ? ""
+                    : user.getBirthdate().toString());
 
+            request.setAttribute("button", "Выйти");
+            ServletContext servletContext = getServletContext();
             if (profileId == 0) {
                 servletContext.getRequestDispatcher("/Account.jsp")
                         .forward(request, response);
@@ -45,7 +46,6 @@ public class ProfileServlet extends HttpServlet {
                         .forward(request, response);
             }
         } else {
-            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

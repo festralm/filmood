@@ -3,23 +3,6 @@ package dao.interfaces;
 import dto.*;
 
 public interface UserDao {
-//    User getUserById(int id);
-
-//    User getUserByUsernamePassword(final String username, final String passwordHash);
-
-//
-//    User getUserByUsername(final String username);
-//
-//    boolean addUser(User user);
-//
-//    boolean deleteUser(User user);
-//
-//    boolean isUserExist(final String username, final String passwordHash);
-//
-//    boolean isUsernameExist(final String username);
-//
-//    boolean editUser(int id, User newUser);
-
     Film[] getWatchedFilmsByUserId(int userId);
 
     Film[] getFavoriteFilmsByUserId(int userId);
@@ -28,7 +11,15 @@ public interface UserDao {
 
     User getUserByUserId(int userId);
 
-    int getRandomFriendByUserId(int userId);
+    int getRandomFriendIdByUserId(int userId);
 
     boolean isUserExist(String username);
+
+    String getPasswordByUsername(String username);
+
+    int getUserIdByUsername(String username);
+
+    boolean editUser(User user);
+
+    boolean addNewUser(User user);
 }

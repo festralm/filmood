@@ -16,13 +16,7 @@
     <script src="js/validation.js"></script>
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="form">
     <div class="authorization_form">
@@ -72,17 +66,8 @@
             </p>
 
             <p>
-                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
+                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !" disabled/>
             </p>
-            <%
-                Object loginExists = request.getSession().getAttribute("check_login");
-                if (loginExists != null) {
-                    out.print("200px");
-                } else {
-                    out.print("0");
-                }
-                request.getSession().setAttribute("check_login", null);
-            %>
         </form>
     </div>
 </div>

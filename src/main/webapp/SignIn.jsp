@@ -15,13 +15,7 @@
     <link rel="stylesheet" type="text/css" href="styles/SignIn.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="form" id="form">
     <div class="image">
@@ -40,15 +34,7 @@
                 <input type="password" name="password" id="password" placeholder=" " minlength="8" maxlength="32" required/>
                 <label for="password">Введите пароль</label>
 
-                <div class="requirements" style="max-height: <%
-                Object passwordIsTrue = request.getSession().getAttribute("check_password");
-                    if (passwordIsTrue != null) {
-                        out.print("200px");
-                    } else {
-                        out.print("0");
-                    }
-                request.getSession().setAttribute("check_password", null);
-                 %>">
+                <div class="requirements" style="max-height: ${check_password}">
                     Пароль неверный
                 </div>
             </div>

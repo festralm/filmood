@@ -7,123 +7,40 @@ Time: 16:49
 To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
-<%
-    Film film = (Film) session.getAttribute("film");
-    String filmName = "";
-    if (film != null) {
-        filmName = film.getName();
-        if (filmName == null || filmName.equals("")) {
-            filmName = "Неизвестно";
-        }
-    }
-%>
 <head>
     <meta charset="UTF-8">
-    <title><%=filmName%>></title>
+    <title>${film.getName()}</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Film.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="film" id="film">
-    <h1><%=filmName%></h1>
+    <h1>${film.getName()}</h1>
 
     <div class="photo" id="photo">
-        <%
-            String outPath = "<img class=\"photo\" src=\"";
-            if (film != null) {
-                String photoUrl = film.getPhotoPath();
-                if (photoUrl != null) {
-                    outPath += photoUrl;
-                }
-                outPath += "\">";
-            }
-            out.print(outPath);
-        %>
+        <img class="photo" src="${film.getPhotoPath()}">
     </div>
     <div class="info" id="info">
-        <p>Год, страна :
-            <%
-                String outYear = "";
-                Country[] countries = new Country[] {};
-
-                if (film != null) {
-                    int startYear = film.getStartYear();
-                    int finishYear = film.getFinishYear();
-
-                    if (startYear != 0) {
-                        outYear += finishYear == 0 ? startYear : finishYear == -1 ?
-                                startYear + "настоящее время" : startYear + " - " + finishYear;
-                    }
-
-                    countries = film.getCountries();
-                }
-
-                if (!outYear.equals("")) {
-                    outPath.print(outYear);
-                } else {
-                    out.print(" Неизвестный год");
-                }
-
-                if (countries != null && countries.length != 0) {
-                    StringBuilder outCountries = new StringBuilder();
-                    for (int i = 0; i < countries.length; i++) {
-                        outCountries.append(", ").append(countries[i].getCountry());
-                    }
-                    out.print(outCountries);
-                } else {
-                    out.print(", Неизвестные страны");
-                }
-            %>
-        </p>
+        <p>Год, страна : ${film.getStartYear()}<c:if test="${film.getFinishYear() != -1}"> - ${film.getFinishYear()}</c:if><c:forEach var="country" items="${film.getCountries()}"><c:out value=", ${country}"/></c:forEach></p>
         <p>Жанр :
-            <%
-                Genre[] genres = new Genre[] {};
+            <c:forEach var="genre" varStatus="count" items="${film.getGenres()}">
+                <c:if test="${count.count == 1}">${genre}</c:if>
+                <c:if test="${count.count != 1}">, ${genre}</c:if>
+            </c:forEach></p>
+        <p>Краткое описание : ${film.getDescription()}</p>
 
-                if (film != null) {
-                    genres = film.getGenres();
-                }
-
-                if (genres != null && genres.length != 0) {
-                    StringBuilder outGenres = new StringBuilder();
-                    for (int i = 0; i < genres.length; i++) {
-                        outGenres.append(", ").append(genres[i].getName());
-                    }
-                    out.print(genres);
-                } else {
-                    out.print(" Неизвестно");
-                }
-            %>
-        </p>
-        <p>Краткое описание :
-            <%
-                String outDescription = "";
-                if (film != null) {
-                    outDescription = film.getDescription();
-                }
-                if (outDescription == null || outDescription.equals("")) {
-                    outDescription = "Неизвестно";
-                }
-                out.print(outDescription);
-            %>
-        </p>
-
-        <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-wanted';">
+        <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-will-watch?id=${film.getId()}';">
     </div>
 </div>
 
 <div class="other" id="other">
-    <form method="post" action="comment">
+    <form method="post" action="comment?id=${film.getId()}">
         <p><b>Оставить комментарий к фильму :</b></p>
         <p><textarea name="comment" id="comment"></textarea></p>
         <p><input type="submit"></p>
@@ -131,17 +48,18 @@ To change this template use File | Settings | File Templates.
 
     <a href="http://localhost:8080/fm/comments" id="allComments">Посмотреть другие комментарии</a>
 </div>
-
-<div class="user_comment" id="user_comment">
-    <div class="ph" id="ph">
-        <img src="">
+<c:forEach var="comment" items="${film.getComments()}">
+    <div class="user_comment" >
+        <div class="ph" >
+            <img src="<c:out value="${comment.getPhotoPath()}"/>">
+        </div>
+        <div class="cm" id="cm">
+            <a id="user_name" href="http://localhost:8080/fm/profile?id=${comment.getUserId()}">${comment.getUsername()}</a>
+            <p>${comment.getDescription()}</p>
+        </div>
     </div>
+</c:forEach>
 
-    <div class="cm" id="cm">
-        <a id="user_name" href="http://localhost:8080/fm/profile">Имя пользователя</a>
-        <p>*комментарий комментарий комментарий комментарий комментарий*</p>
-    </div>
-</div>
 <jsp:include page="includes/footer.jsp"/>
 </body>
 </html>

@@ -7,6 +7,7 @@ import dto.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UserDaoMySql implements UserDao {
     private final MySqlConnection connection = new MySqlConnection();
@@ -15,13 +16,13 @@ public class UserDaoMySql implements UserDao {
     public Film[] getWatchedFilmsByUserId(int userId) {
         try  {
             String sql = "select film.id, film.name, film.photo_path," +
-                    "film.start_year, film.finish_year " +
+                    "film.start_year, film.description, film.finish_year " +
                     "from filmood.user " +
-                    "inner join film_user_watched " +
+                    "inner join filmood.film_user_watched " +
                     "on user.id = film_user_watched.user_id " +
                     "inner join filmood.film " +
-                    "on film_user_watched.film_id = film.id" +
-                    "where user.id = ?" +
+                    "on film_user_watched.film_id = film.id " +
+                    "where user.id = ? " +
                     "order by film.name";
             return getFilmsBySql(sql, userId);
         }
@@ -34,15 +35,15 @@ public class UserDaoMySql implements UserDao {
 
     @Override
     public Film[] getFavoriteFilmsByUserId(int userId) {
-        try  {
-            String sql = "select film.id, film.name, film.photo_path," +
-                    "film.start_year, film.finish_year " +
+        try {
+            String sql = "select film.id, film.name, film.photo_path, " +
+                    "film.start_year, film.description, film.finish_year " +
                     "from filmood.user " +
-                    "inner join film_user_favorite " +
+                    "inner join filmood.film_user_favorite " +
                     "on user.id = film_user_favorite.user_id " +
                     "inner join filmood.film " +
-                    "on film_user_favorite.film_id = film.id" +
-                    "where user.id = ?" +
+                    "on film_user_favorite.film_id = film.id " +
+                    "where user.id = ? " +
                     "order by film.name";
             return getFilmsBySql(sql, userId);
         }
@@ -56,14 +57,14 @@ public class UserDaoMySql implements UserDao {
     @Override
     public Film[] getWillWatchFilmsByUserId(int userId) {
         try  {
-            String sql = "select film.id, film.name, film.photo_path," +
-                    "film.start_year, film.finish_year " +
+            String sql = "select film.id, film.name, film.photo_path, " +
+                    "film.start_year, film.description, film.finish_year " +
                     "from filmood.user " +
-                    "inner join film_user_will_watch " +
+                    "inner join filmood.film_user_will_watch " +
                     "on user.id = film_user_will_watch.user_id " +
                     "inner join filmood.film " +
-                    "on film_user_will_watch.film_id = film.id" +
-                    "where user.id = ?" +
+                    "on film_user_will_watch.film_id = film.id " +
+                    "where user.id = ? " +
                     "order by film.name";
             return getFilmsBySql(sql, userId);
         }
@@ -75,13 +76,13 @@ public class UserDaoMySql implements UserDao {
     }
 
     private Film[] getFilmsBySql(String sql, int userId) throws SQLException {
-        List<Film> films = new ArrayList<>();
         Connection con = connection.getNewConnection() ;
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setInt(1, userId);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
+        List<Film> films = new ArrayList<>();
         while (resultSet.next()) {
             Film film = new FilmDaoMySql().getFilmFromResultSet(resultSet);
 
@@ -95,8 +96,9 @@ public class UserDaoMySql implements UserDao {
     @Override
     public User getUserByUserId(int userId) {
         try (Connection con = connection.getNewConnection()) {
-            String sql = "select id, username, password, email, birthdate, fullname," +
+            String sql = "select username, password, email, birthdate, fullname, " +
                     "photo_path " +
+                    "from filmood.user " +
                     "where user.id = ?";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
                 preparedStatement.setInt(1, userId);
@@ -104,14 +106,14 @@ public class UserDaoMySql implements UserDao {
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String username = resultSet.getString(2);
-                    String email = resultSet.getString(4);
-                    Date birthdate = resultSet.getDate(5);
-                    String fullname = resultSet.getString(6);
-                    String photoPath = resultSet.getString(7);
+                    String username = resultSet.getString(1);
+                    String passwordHash = resultSet.getString(2);
+                    String email = resultSet.getString(3);
+                    Date birthdate = resultSet.getDate(4);
+                    String fullname = resultSet.getString(5);
+                    String photoPath = resultSet.getString(6);
 
-                    return new User(id, username, email,
+                    return new User(userId, username, passwordHash, email,
                             birthdate, fullname, photoPath);
                 }
             }
@@ -124,44 +126,65 @@ public class UserDaoMySql implements UserDao {
     }
 
     @Override
-    public int getRandomFriendByUserId(int userId) {
+    public int getRandomFriendIdByUserId(int userId) {
         try (Connection con = connection.getNewConnection()) {
-            String sql1 = "select friend.user2_id " +
-                    "from user " +
-                    "inner join friend " +
-                    "on user.id = friend.user1_id " +
-                    "where user.id = ? and (status = 1 or status = 0) " +
-                    "order by rand() " +
-                    "limit 1";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql1)){
-                preparedStatement.setInt(1, userId);
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                if (resultSet.next()) {
-                    return resultSet.getInt(1);
+            double rand = new Random().nextDouble();
+            int res;
+            if (rand < 0.5) {
+                res = getRandomFriendTo(userId, con);
+                if (res == -1) {
+                    return getRandomFriendFrom(userId, con);
+                }
+            } else {
+                res = getRandomFriendFrom(userId, con);
+                if (res == -1) {
+                    return getRandomFriendTo(userId, con);
                 }
             }
-            String sql2 = "select friend.user1_id " +
-                    "from user " +
-                    "inner join friend " +
-                    "on user.id = friend.user2_id " +
-                    "where user.id = ? and (status = -1 or status = 0) " +
-                    "order by rand() " +
-                    "limit 1";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql2)){
-                preparedStatement.setInt(1, userId);
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                if (resultSet.next()) {
-                    return resultSet.getInt(1);
-                }
-            }
+            return res;
         }
         catch (SQLException exception) {
             System.out.println("Something went wrong...");
             exception.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int getRandomFriendTo(int userId, Connection con) throws SQLException {
+        String sql = "select friend.user2_id " +
+                "from filmood.user " +
+                "inner join filmood.friend " +
+                "on user.id = friend.user1_id " +
+                "where user.id = ? and (status = 1 or status = 0) " +
+                "order by rand() " +
+                "limit 1";
+        try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }
+        return -1;
+    }
+    private int getRandomFriendFrom(int userId, Connection con) throws SQLException {
+        String sql = "select friend.user1_id " +
+                "from filmood.user " +
+                "inner join filmood.friend " +
+                "on user.id = friend.user2_id " +
+                "where user.id = ? and (status = -1 or status = 0) " +
+                "order by rand() " +
+                "limit 1";
+        try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
         }
         return -1;
     }
@@ -189,173 +212,97 @@ public class UserDaoMySql implements UserDao {
         return false;
     }
 
-//    @Override
-//    public User getUserById(int id) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "select id, username, password, email, birthdate, fullname " +
-//                    "from filmood.user " +
-//                    "where id = ?";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setInt(1, id);
-//
-//                ResultSet resultSet = preparedStatement.executeQuery();
-//
-//                if (resultSet.next()) {
-//                    String username = resultSet.getString(2);
-//                    String passwordHash = resultSet.getString(3);
-//                    String email = resultSet.getString(4);
-//                    Date birthdate = resultSet.getDate(5);
-//                    String fullname = resultSet.getString(6);
-//
-//                    return new User(id, username, passwordHash, email, birthdate, fullname);
-//                }
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return null;
-//    }
+    @Override
+    public String getPasswordByUsername(String username) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select password " +
+                    "from filmood.user " +
+                    "where (username = ?)";
 
-//    @Override
-//    public User getUserByUsernamePassword(String username, String passwordHash) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "select id, username, password, email, birthdate, fullname " +
-//                    "from filmood.user " +
-//                    "where (username = ? and password = ?)";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setString(1, username);
-//                preparedStatement.setString(2, passwordHash);
-//
-//                ResultSet resultSet = preparedStatement.executeQuery();
-//
-//                if (resultSet.next()) {
-//                    int id = resultSet.getInt(1);
-//                    String email = resultSet.getString(4);
-//                    Date birthdate = resultSet.getDate(5);
-//                    String fullname = resultSet.getString(6);
-//
-//                    return new User(id, username, passwordHash, email, birthdate, fullname);
-//                }
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return null;
-//    }
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
 
-//    public User getUserByUsername(String username) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "select id, username, password, email, birthdate, fullname " +
-//                    "from filmood.user " +
-//                    "where (username = ?)";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setString(1, username);
-//
-//                ResultSet resultSet = preparedStatement.executeQuery();
-//
-//                if (resultSet.next()) {
-//                    int id = resultSet.getInt(1);
-//                    String passwordHash = resultSet.getString(3);
-//                    String email = resultSet.getString(4);
-//                    Date birthdate = resultSet.getDate(5);
-//                    String fullname = resultSet.getString(6);
-//
-//                    return new User(id, username, passwordHash, email, birthdate, fullname);
-//                }
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean addUser(User user) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "insert into filmood.user " +
-//                    "(username, password, email, birthdate, fullname) " +
-//                    "values (?, ?, ?, ?, ?)";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setString(1, user.getUsername());
-//                preparedStatement.setString(2, user.getPassword());
-//                preparedStatement.setString(3, user.getEmail());
-//                preparedStatement.setDate(4, user.getBirthdate());
-//                preparedStatement.setString(5, user.getFullname());
-//
-//                preparedStatement.executeUpdate();
-//                return true;
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean deleteUser(User user) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isUserExist(String username, String passwordHash) {
-//        return getUserByUsernamePassword(username, passwordHash) != null;
-//    }
-//
-//    @Override
-//    public boolean isUsernameExist(String username) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "select id, username, password, email, birthdate, fullname " +
-//                    "from filmood.user " +
-//                    "where (username = ?)";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setString(1, username);
-//
-//                ResultSet resultSet = preparedStatement.executeQuery();
-//
-//                if (resultSet.next()) {
-//                    return true;
-//                }
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean editUser(int id, User newUser) {
-//        try (Connection con = connection.getNewConnection()) {
-//            String sql = "update filmood.user set " +
-//                    "username = ?, password = ?, email = ?, birthdate = ?, fullname = ? " +
-//                    "where id = ?";
-//            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-//                preparedStatement.setString(1, newUser.getUsername());
-//                preparedStatement.setString(2, newUser.getPassword());
-//                preparedStatement.setString(3, newUser.getEmail());
-//                preparedStatement.setDate(4, newUser.getBirthdate());
-//                preparedStatement.setString(5, newUser.getFullname());
-//                preparedStatement.setInt(6, id);
-//
-//                preparedStatement.executeUpdate();
-//                return true;
-//            }
-//        }
-//        catch (SQLException exception) {
-//            System.out.println("Something went wrong...");
-//            exception.printStackTrace();
-//        }
-//        return false;
-//    }
+                ResultSet resultSet = preparedStatement.executeQuery();
 
+                if (resultSet.next()) {
+                    return resultSet.getString(1);
+                }
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
 
+    @Override
+    public int getUserIdByUsername(String username) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select id " +
+                    "from filmood.user " +
+                    "where (username = ?)";
+
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean editUser(User user) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "update filmood.user " +
+                    "set username = ?, password = ?, email = ?, birthdate = ?," +
+                    "fullname = ? " +
+                    "where id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setString(1, user.getUsername());
+                preparedStatement.setString(2, user.getPassword());
+                preparedStatement.setString(3, user.getEmail());
+                preparedStatement.setDate(4, user.getBirthdate());
+                preparedStatement.setString(5, user.getFullname());
+                preparedStatement.setInt(6, user.getId());
+
+                preparedStatement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addNewUser(User user) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "insert into filmood.user " +
+                    "(username, password, email) " +
+                    "values (?, ?, ?)";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setString(1, user.getUsername());
+                preparedStatement.setString(2, user.getPassword());
+                preparedStatement.setString(3, user.getEmail());
+
+                preparedStatement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return false;
+    }
 }

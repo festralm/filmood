@@ -1,4 +1,4 @@
-<%--
+x<%--
   Created by IntelliJ IDEA.
   User: katty
   Date: 29.10.2020
@@ -15,13 +15,8 @@
     <link rel="stylesheet" type="text/css" href="styles/Account.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
 
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="ph" id="ph">
     <div class="photo" id="photo">
@@ -36,7 +31,7 @@
 <div class="box">
     <%--    <h2>Имя и фамилия:</h2>--%>
     <%--    <input type="text" class="input" value="Абрамский Михаил">--%>
-    <form action="edit_profile" method="post">
+    <form action="edit-profile" method="post">
         <h2>Имя и фамилия:</h2>
         <input name="fullname" type="text" class="input" value="${fullname}">
 
