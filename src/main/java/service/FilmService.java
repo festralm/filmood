@@ -34,6 +34,18 @@ public class FilmService {
 
         return films;
     }
+    @SneakyThrows
+    public Film[] geFilmsByGenre(String genre) {
+        if (genre == null) {
+            throw new IncorrectGenresException();
+        }
+        Film[] films = filmDao.getFilmsByGenre(genre);
+        if (films == null) {
+            throw new IncorrectFilmException();
+        }
+
+        return films;
+    }
 
     @SneakyThrows
     public Film getFilmByWordAndUserId(String inputWord, int userId) {

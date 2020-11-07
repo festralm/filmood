@@ -16,10 +16,11 @@ public class CheckRegistrationFormServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         final String username = request.getParameter("username");
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
         UserService userService = new UserService();
 

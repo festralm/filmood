@@ -13,6 +13,8 @@ import java.io.IOException;
 public class AuthorizationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         if (Cookies.checkCookie(request)) {
             response.sendRedirect("/fm/");

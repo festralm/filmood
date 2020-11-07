@@ -22,6 +22,8 @@ public class MyFilmsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         if (Cookies.checkCookie(request)) {
             int userId = (int) session.getAttribute("user_id");
 

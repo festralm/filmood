@@ -2,6 +2,7 @@ package servlet;
 
 import dto.Film;
 import service.FilmService;
+import service.GenreService;
 import useful.Cookies;
 
 import javax.servlet.RequestDispatcher;
@@ -21,9 +22,30 @@ public class AllFilmsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        String genre = request.getParameter("genre");
+
         FilmService filmService = new FilmService();
-        Film[] films = filmService.getAllFilms();
+        Film[] films;
+        if (genre == null) {
+            films = filmService.getAllFilms();
+            for (Film film : films) {
+                filmService.addGenres(film);
+            }
+        } else {
+            films = filmService.geFilmsByGenre(genre);
+            for (Film film : films) {
+                filmService.addGenres(film);
+            }
+        }
+
+        GenreService genreService = new GenreService();
+        String[] genres = genreService.getAllGenres();
+
         request.setAttribute("films", films);
+        request.setAttribute("genres", genres);
 
         if (Cookies.checkCookie(request)) {
             request.setAttribute("button", "Выйти");

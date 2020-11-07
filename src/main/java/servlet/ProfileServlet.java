@@ -21,6 +21,8 @@ public class ProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         if (Cookies.checkCookie(request)) {
             final HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("user_id");

@@ -15,6 +15,7 @@ import java.sql.Date;
 public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         final String fullname = request.getParameter("fullname");
         final String username = request.getParameter("username");
         final String email = request.getParameter("email");

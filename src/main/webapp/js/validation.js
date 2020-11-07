@@ -38,7 +38,6 @@ function check_passwords() {
         passwords_error.style.maxHeight = '0';
         button.disabled = false;
     }
-
 }
 
 function check_word() {
@@ -56,7 +55,7 @@ function check_word() {
     xhr.open('GET',  url, false);
     xhr.send();
     if (xhr.status !== 200) {
-        window.location.href = "something_happened";
+        window.location.href = "/something_happened.html";
     } else {
         const result = xhr.responseText;
         if (result === 'false') {

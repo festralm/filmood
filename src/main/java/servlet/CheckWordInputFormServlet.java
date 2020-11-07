@@ -17,10 +17,11 @@ public class CheckWordInputFormServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         final String word = request.getParameter("word");
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
         WordService wordService = new WordService();
 

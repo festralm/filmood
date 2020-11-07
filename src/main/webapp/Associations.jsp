@@ -47,7 +47,7 @@
     </form>
 </div>
 <c:if test="${film != null}">
-    <div class="area2" id="area2">
+    <div name="area2" class="area2" id="area2">
         <div class="new" id="new">
             <jsp:include page="includes/film.jsp"/>
         </div>

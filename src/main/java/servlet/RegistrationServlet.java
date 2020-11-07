@@ -16,6 +16,8 @@ import java.util.Arrays;
 @WebServlet("/register-in")
 public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         final String username = request.getParameter("username");
         final char[] password1 = request.getParameter("password").toCharArray();
         final String email = request.getParameter("email");

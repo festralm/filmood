@@ -17,13 +17,14 @@ public class LotteryServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         FilmService filmService = new FilmService();
         Film film = filmService.getRandomFilm();
         filmService.addCountries(film);
         filmService.addGenres(film);
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", film.getId());

@@ -1,7 +1,8 @@
-//package dao.interfaces;
-//
-//import dto.*;
-//
-//public interface GenreDao {
-//    Genre getGenreByGenreId(int id);
-//}
+package dao.interfaces;
+
+import dto.Comment;
+import dto.Film;
+
+public interface GenreDao {
+    String[] getAllGenres();
+}

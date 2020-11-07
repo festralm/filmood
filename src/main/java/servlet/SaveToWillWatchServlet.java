@@ -20,6 +20,8 @@ public class SaveToWillWatchServlet extends HttpServlet {
     @SneakyThrows
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         if (Cookies.checkCookie(request)) {
             HttpSession session = request.getSession();
             final int userId = (int) session.getAttribute("user_id");

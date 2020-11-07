@@ -6,6 +6,7 @@ public interface FilmDao {
     String[] getGenresByFilmId(int id);
 
     Film[] getAllFilms();
+    Film[] getFilmsByGenre(String genre);
 
     Film getFilmByWordAndUserId(String inputWord, int userId);
     Film getFilmByWord(String inputWord);

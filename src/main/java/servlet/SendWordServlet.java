@@ -16,9 +16,10 @@ import java.io.IOException;
 @WebServlet("/send-word")
 public class SendWordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         if (Cookies.checkCookie(request)) {
-            request.setCharacterEncoding("UTF-8");
             int filmId = -1;
             try {
                 filmId = FilmId.getFilmIdForPopup(request, response);

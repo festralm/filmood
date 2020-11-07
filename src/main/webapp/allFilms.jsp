@@ -21,11 +21,10 @@
 <div class="container">
     <nav>
         <ul>
-            <li data-f="all">ВСЕ КАТЕГОРИИ</li>
-            <li data-f="melodramas" class="text-melodramas">МЕЛОДРАМЫ</li>
-            <li data-f="comedies" class="text-comedies">КОМЕДИИ</li>
-            <li data-f="thrillers" class="text-thrillers">ТРИЛЛЕРЫ</li>
-            <li data-f="dramas" class="text-dramas">ДРАМЫ</li>
+            <li data-f="all" onclick="window.location.href = 'http://localhost:8080/fm/all-films'">ВСЕ КАТЕГОРИИ</li>
+            <c:forEach var="genre" items="${genres}">
+                <li data-f="melodramas" onclick="filter()" class="text-melodramas" id="genre">${genre}</li>
+            </c:forEach>
         </ul>
     </nav>
 

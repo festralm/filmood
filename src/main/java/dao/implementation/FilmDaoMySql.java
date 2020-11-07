@@ -72,6 +72,41 @@ public class FilmDaoMySql implements FilmDao {
     }
 
     @Override
+    public Film[] getFilmsByGenre(String genre) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select film.id, film.name, film.photo_path, " +
+                    "film.start_year, film.description, " +
+                    "film.finish_year " +
+                    "from filmood.film " +
+                    "inner join filmood.film_genre " +
+                    "on film.id = film_genre.film_id " +
+                    "inner join filmood.genre " +
+                    "on genre.id = film_genre.genre_id " +
+                    "where genre.name = ?" +
+                    "order by film.name";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                preparedStatement.setString(1, genre);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<Film> films = new ArrayList<>();
+                while (resultSet.next()) {
+                    Film film = getFilmFromResultSet(resultSet);
+
+                    if (film != null) {
+                        films.add(film);
+                    }
+                }
+                return films.toArray(new Film[] {});
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Film getFilmByWord(String inputWord) {
         try (Connection con = connection.getNewConnection()) {
             String sql = "select film.id, film.name, film.photo_path, " +

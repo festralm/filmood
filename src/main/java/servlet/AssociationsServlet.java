@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 
 @WebServlet("/associations")
@@ -23,18 +24,18 @@ public class AssociationsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         WordService wordService = new WordService();
         String[] words = wordService.getAllWords();
         request.setAttribute("words", Arrays.copyOf(words, 4));
 
-        request.setCharacterEncoding("UTF-8");
 
         if (Cookies.checkCookie(request)) {
             request.setAttribute("button", "Выйти");
         } else {
             request.setAttribute("button", "Войти");
         }
-
         String inputWord = request.getParameter("word");
         if (inputWord != null) {
             FilmService filmService = new FilmService();
