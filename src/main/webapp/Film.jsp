@@ -7,6 +7,7 @@ Time: 16:49
 To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,9 +51,6 @@ To change this template use File | Settings | File Templates.
 </div>
 <c:forEach var="comment" items="${film.getComments()}">
     <div class="user_comment" id="user_comment">
-        <div class="ph" >
-            <img class="ph_user" src="<c:out value="${comment.getPhotoPath()}"/>">
-        </div>
         <div class="cm" id="cm">
             <a id="user_name" href="http://localhost:8080/fm/profile?id=${comment.getUserId()}">${comment.getUsername()}</a>
             <p>${comment.getDescription()}</p>

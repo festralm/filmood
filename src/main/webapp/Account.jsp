@@ -1,4 +1,4 @@
-<%--
+x<%--
   Created by IntelliJ IDEA.
   User: katty
   Date: 29.10.2020
@@ -50,7 +50,6 @@
             </div>
         </form>
     </div>
-</div>
 <jsp:include page="includes/footer.jsp"/>
 </body>
 </html>
