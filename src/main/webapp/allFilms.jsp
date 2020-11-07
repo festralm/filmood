@@ -16,14 +16,7 @@
     <script src="js/filter.js"></script>
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
-
+<jsp:include page="includes/menu.jsp"/>
 <div class="container">
     <nav>
         <ul>
@@ -36,12 +29,7 @@
     </nav>
 
     <div class="rec" id="rec">
-        <%
-            Object film = session.getAttribute("films");
-        %>
-        <jsp:include page="includes/films.jsp">
-            <jsp:param name="films" value="<%=film%>"/>
-        </jsp:include>
+        <jsp:include page="includes/films.jsp"/>
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>

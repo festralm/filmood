@@ -20,23 +20,22 @@ public class WillWatchServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final HttpSession session = request.getSession();
-        ServletContext servletContext = getServletContext();
-        if (CheckSession.check(session, request)) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (Cookies.checkCookie(request)) {
+            final HttpSession session = request.getSession();
+            int userId = (int) session.getAttribute("user_id");
+
             UserService userService = new UserService();
-            int userId = (int)session.getAttribute("user_id");
-
             Film[] willWatchFilms = userService.getWillWatchFilmsByUserId(userId);
+            request.setAttribute("films", willWatchFilms);
 
-            session.setAttribute("films", willWatchFilms);
-
-            session.setAttribute("button", "Выйти");
+            request.setAttribute("button", "Выйти");
             String path = "/willWatch.jsp";
+            ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);
         } else {
-            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

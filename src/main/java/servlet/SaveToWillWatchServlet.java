@@ -1,16 +1,14 @@
 package servlet;
 
-import exception.CouldNotAddWillWatchFilmException;
+import exception.IncorrectFilmIdException;
 import lombok.SneakyThrows;
 import service.FilmUserWillWatchService;
-import useful.CheckSession;
+import useful.Cookies;
+import useful.FilmId;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/save-to-will-watch")
@@ -20,23 +18,26 @@ public class SaveToWillWatchServlet extends HttpServlet {
     }
 
     @SneakyThrows
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (CheckSession.check(session, request)) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (Cookies.checkCookie(request)) {
+            HttpSession session = request.getSession();
             final int userId = (int) session.getAttribute("user_id");
-            final int filmId = (int) session.getAttribute("film_id");
-
-            FilmUserWillWatchService filmUserWillWatchService = new FilmUserWillWatchService();
-
-            if (!filmUserWillWatchService.addFilmUserByIds(filmId, userId)) {
-                throw new CouldNotAddWillWatchFilmException();
+            int filmId = -1;
+            try {
+                filmId = FilmId.getFilmIdForPopup(request, response);
+            } catch (IncorrectFilmIdException exception) {
+                response.sendRedirect("/fm");
             }
+            if (filmId != -1) {
+                FilmUserWillWatchService filmUserWillWatchService =
+                        new FilmUserWillWatchService();
+                filmUserWillWatchService.addFilmUserByIds(filmId, userId);
 
-            session.setAttribute("button", "Выйти");
-            response.sendRedirect("/fm");
+                request.setAttribute("button", "Выйти");
+                response.sendRedirect("/fm/will-watch");
+            }
         } else {
-
-            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

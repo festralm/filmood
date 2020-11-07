@@ -16,7 +16,7 @@
             <column name="finish_year"
                     position="5"
                     type="int"
-                    defaultValue="0"/>
+                    defaultValue="-1"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>

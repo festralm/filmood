@@ -3,53 +3,18 @@ package dao.implementation;
 import dao.MySqlConnection;
 import dao.interfaces.FilmDao;
 import dto.*;
-import service.FilmService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FilmDaoMySql implements FilmDao {
     private final MySqlConnection connection = new MySqlConnection();
-
-    @Override
-    public Comment[] getCommentsByFilmId(int id) {
-        List<Comment> comments = new ArrayList<>();
-        try (Connection con = connection.getNewConnection()) {
-            String sql = "select comment.film_id, comment.user_id," +
-                    "comment.description " +
-                    "from filmood.film " +
-                    "inner join comment " +
-                    "on film.id = comment.film_id " +
-                    "where film.id = ? " +
-                    "order by comment.datetime";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-                preparedStatement.setInt(1, id);
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                while (resultSet.next()) {
-                    int userId = resultSet.getInt(2);
-                    String description = resultSet.getString(3);
-
-                    comments.add(new Comment(id, userId, description));
-                }
-            }
-        }
-        catch (SQLException exception) {
-            System.out.println("Something went wrong...");
-            exception.printStackTrace();
-        }
-        return comments.toArray(new Comment[] {});
-    }
-
     @Override
     public String[] getGenresByFilmId(int id) {
-        List<String> genres = new ArrayList<>();
         try (Connection con = connection.getNewConnection()) {
             String sql = "select genre.name " +
                     "from filmood.film " +
@@ -64,79 +29,22 @@ public class FilmDaoMySql implements FilmDao {
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
+                List<String> genres = new ArrayList<>();
                 while (resultSet.next()) {
                     genres.add(resultSet.getString(1));
                 }
+                return genres.toArray(new String[] {});
             }
         }
         catch (SQLException exception) {
             System.out.println("Something went wrong...");
             exception.printStackTrace();
         }
-        return genres.toArray(new String[] {});
-    }
-
-    @Override
-    public String[] getWordsByFilmId(int id) {
-        List<String> words = new ArrayList<>();
-        try (Connection con = connection.getNewConnection()) {
-            String sql = "select word.name " +
-                    "from filmood.film " +
-                    "inner join film_word " +
-                    "on film.id = film_word.film_id " +
-                    "inner join word " +
-                    "on word.id = film_word.word_id " +
-                    "where film.id = ? " +
-                    "order by word.name";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-                preparedStatement.setInt(1, id);
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                while (resultSet.next()) {
-                    words.add(resultSet.getString(1));
-                }
-            }
-        }
-        catch (SQLException exception) {
-            System.out.println("Something went wrong...");
-            exception.printStackTrace();
-        }
-        return words.toArray(new String[] {});
-    }
-
-    @Override
-    public String[] getCountriesByFilmId(int id) {
-        List<String> countries = new ArrayList<>();
-        try (Connection con = connection.getNewConnection()) {
-            String sql = "select country.name " +
-                    "from filmood.film " +
-                    "inner join film_country " +
-                    "on film.id = film_country.film_id " +
-                    "inner join country " +
-                    "on country.id = film_country.country_id " +
-                    "where film.id = ? " +
-                    "order by country.name";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
-                preparedStatement.setInt(1, id);
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                while (resultSet.next()) {
-                    countries.add(resultSet.getString(1));
-                }
-            }
-        }
-        catch (SQLException exception) {
-            System.out.println("Something went wrong...");
-            exception.printStackTrace();
-        }
-        return countries.toArray(new String[] {});
+        return null;
     }
 
     @Override
     public Film[] getAllFilms() {
-        List<Film> films = new ArrayList<>();
         try (Connection con = connection.getNewConnection()) {
             String sql = "select id, name, photo_path, start_year, description, " +
                     "finish_year " +
@@ -145,6 +53,7 @@ public class FilmDaoMySql implements FilmDao {
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
                 ResultSet resultSet = preparedStatement.executeQuery();
 
+                List<Film> films = new ArrayList<>();
                 while (resultSet.next()) {
                     Film film = getFilmFromResultSet(resultSet);
 
@@ -152,17 +61,18 @@ public class FilmDaoMySql implements FilmDao {
                         films.add(film);
                     }
                 }
+                return films.toArray(new Film[] {});
             }
         }
         catch (SQLException exception) {
             System.out.println("Something went wrong...");
             exception.printStackTrace();
         }
-        return films.toArray(new Film[] {});
+        return null;
     }
 
     @Override
-    public Film getFilmByWord(String inputWord, int userId) {
+    public Film getFilmByWord(String inputWord) {
         try (Connection con = connection.getNewConnection()) {
             String sql = "select film.id, film.name, film.photo_path, " +
                     "film.start_year, film.description, film.finish_year " +
@@ -170,13 +80,148 @@ public class FilmDaoMySql implements FilmDao {
                     "inner join film_word " +
                     "on film.id = film_word.film_id " +
                     "inner join word " +
-                    "on film_word.word_id = word.id ";
-            if (userId != -1) {
-                sql += "where not exists (select film_user_watched.user_id as user_id" +
-                        "from film_user_watched.user_id " +
-                        "where user_id = ?) ";
+                    "on film_word.word_id = word.id " +
+                    "and word.name = ? " +
+                    "order by film_word.count desc " +
+                    "limit 1";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                preparedStatement.setString(1, inputWord);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    return getFilmFromResultSet(resultSet);
+                }
             }
-            sql +=  "where word.name = ? " +
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Film getFilmById(int filmId) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select id, name, photo_path, start_year, description, finish_year " +
+                    "from filmood.film " +
+                    "where id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                preparedStatement.setInt(1, filmId);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    return getFilmFromResultSet(resultSet);
+                }
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public String[] getCountriesByFilmId(int id) {
+        try (Connection con = connection.getNewConnection()) {
+            List<String> result = new ArrayList<>();
+            String sql1 = "select country.name " +
+                    "from filmood.country " +
+                    "inner join film_country " +
+                    "on country.id = film_country.country_id " +
+                    "inner join film " +
+                    "on film_country.film_id = film.id " +
+                    "where film.id = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql1)){
+                preparedStatement.setInt(1, id);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String name = resultSet.getString(1);
+
+                    result.add(name);
+                }
+                return result.toArray(new String[] {});
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Comment[] geCommentsByFilmId(int id) {
+        try (Connection con = connection.getNewConnection()) {
+            List<Comment> result = new ArrayList<>();
+            String sql1 = "select comment.user_id, comment.description, comment.datetime " +
+                    "from filmood.comment " +
+                    "where film_id = ? " +
+                    "order by datetime desc";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql1)){
+                preparedStatement.setInt(1, id);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    int userId = resultSet.getInt(1);
+                    String description = resultSet.getString(2);
+                    Comment comment = new Comment(userId, description);
+                    comment.addPhotoPathAndUsername(userId);
+                    result.add(comment);
+                }
+                return result.toArray(new Comment[] {});
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Film getRandomFilm() {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select film.id, film.name, film.photo_path, " +
+                    "film.start_year, film.description, film.finish_year " +
+                    "from filmood.film " +
+                    "order by rand() " +
+                    "limit 1";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)){
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    return getFilmFromResultSet(resultSet);
+                }
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("Something went wrong...");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Film getFilmByWordAndUserId(String inputWord, int userId) {
+        try (Connection con = connection.getNewConnection()) {
+            String sql = "select film.id, film.name, film.photo_path, " +
+                    "film.start_year, film.description, film.finish_year " +
+                    "from filmood.film " +
+                    "inner join filmood.film_word " +
+                    "on film.id = film_word.film_id " +
+                    "inner join filmood.word " +
+                    "on film_word.word_id = word.id " +
+                    "left join filmood.film_user_watched " +
+                    "on film.id = film_user_watched.film_id " +
+                    "where film_user_watched.user_id is null " +
+                    "and word.name = ? " +
                     "order by film_word.count desc " +
                     "limit 1";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)){

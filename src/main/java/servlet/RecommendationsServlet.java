@@ -20,25 +20,26 @@ public class RecommendationsServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (CheckSession.check(session, request)) {
-            UserService userService = new UserService();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (Cookies.checkCookie(request)) {
+            HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("user_id");
 
-            int friendId = userService.getRandomFriendByUserId(userId);
+            UserService userService = new UserService();
+            int friendId = userService.getRandomFriendIdByUserId(userId);
+            Film[] films = new Film[0];
+            if (friendId != -1) {
+                films = userService.getFavoriteFilmsByUserId(friendId);
+            }
+            request.setAttribute("films", films);
 
-            Film[] films = userService.getFavoriteFilmsByUserId(friendId);
-
-            session.setAttribute("films", films);
-
-            session.setAttribute("button", "Выйти");
+            request.setAttribute("button", "Выйти");
             String path = "/Recommendation.jsp";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);
         } else {
-            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

@@ -22,21 +22,19 @@ public class MyFilmsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final HttpSession session = request.getSession();
-        ServletContext servletContext = getServletContext();
-        if (CheckSession.check(session, request)) {
+        if (Cookies.checkCookie(request)) {
+            int userId = (int) session.getAttribute("user_id");
+
             UserService userService = new UserService();
-            int userId = (int)session.getAttribute("user_id");
-
             Film[] watchedFilms = userService.getWatchedFilmsByUserId(userId);
+            request.setAttribute("films", watchedFilms);
 
-            session.setAttribute("films", watchedFilms);
-
-            session.setAttribute("button", "Выйти");
+            request.setAttribute("button", "Выйти");
             String path = "/MyMovies.jsp";
+            ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
             requestDispatcher.forward(request, response);
         } else {
-            session.setAttribute("button", "Войти");
             response.sendRedirect("/fm/authorize");
         }
     }

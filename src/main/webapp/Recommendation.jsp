@@ -15,24 +15,11 @@
     <link rel="stylesheet" type="text/css" href="styles/Recommendation.css">
 </head>
 <body>
-<%
-    Object button = request.getSession().getAttribute("button");
-%>
-
-<jsp:include page="includes/menu.jsp">
-    <jsp:param name="button" value="<%=button%>"/>
-</jsp:include>
+<jsp:include page="includes/menu.jsp"/>
 
 <div class="rec" id="rec">
     <h2>Рекомендасьён :</h2>
-
-
-    <%
-        Object film = session.getAttribute("films");
-    %>
-    <jsp:include page="includes/films.jsp">
-        <jsp:param name="films" value="<%=film%>"/>
-    </jsp:include>
+    <jsp:include page="includes/films.jsp"/>
 </div>
 <jsp:include page="includes/footer.jsp"/>
 </body>

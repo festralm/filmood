@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LogIn {
-    public static void logIn(String username, HttpServletRequest request,
+    public static void logIn(int userId, HttpServletRequest request,
                              HttpServletResponse response) throws IOException {
 
-        request.getSession().setAttribute("username", username);
+        request.getSession().setAttribute("user_id", userId);
 
-        Cookie cookie = new Cookie("user", username);
-        if (request.getParameter("check") == null) {
+        Cookie cookie = new Cookie("user_id", Integer.toString(userId));
+        if (request.getParameter("remember_me") == null) {
             cookie.setMaxAge(-1);
         } else {
             cookie.setMaxAge(60 * 60 * 24);
         }
         response.addCookie(cookie);
         response.sendRedirect("/fm/");
-        //req.getRequestDispatcher("/main").forward(req, resp);
     }
 }

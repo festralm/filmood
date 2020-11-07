@@ -1,6 +1,6 @@
 package servlet;
 
-import useful.CheckSession;
+import useful.Cookies;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -9,9 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -20,13 +18,12 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (CheckSession.check(session, request)) {
-            session.setAttribute("button", "Выйти");
-            response.sendRedirect(request.getContextPath());
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (Cookies.checkCookie(request)) {
+            response.sendRedirect("/fm");
         } else {
-            session.setAttribute("button", "Войти");
+            request.setAttribute("button", "Войти");
             String path = "/Registration.jsp";
             ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
