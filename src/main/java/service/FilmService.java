@@ -57,6 +57,7 @@ public class FilmService {
         }
         Film film = filmDao.getFilmByWord(inputWord
                 .replaceAll("/  +/g", " ")
+                .replace("/[^A-Za-zА-Яа-яЁё]/g", "")
                 .trim()
                 .toLowerCase());
         return film;

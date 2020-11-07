@@ -20,6 +20,7 @@ public class FilmWordService {
         }
         return filmWordDao.addWordUserByIds(filmId, word
                 .replaceAll("/  +/g", " ")
+                .replace("/[^A-Za-zА-Яа-яЁё]/g", "")
                 .trim()
                 .toLowerCase());
     }

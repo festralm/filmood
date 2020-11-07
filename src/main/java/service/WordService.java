@@ -25,6 +25,7 @@ public class WordService {
         }
         boolean exists = wordDao.isWordExist(word
                 .replaceAll("/  +/g", " ")
+                .replace("/[^A-Za-zА-Яа-яЁё]/g", "")
                 .trim()
                 .toLowerCase());
         return exists;

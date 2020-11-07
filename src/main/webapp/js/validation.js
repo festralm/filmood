@@ -43,12 +43,16 @@ function check_passwords() {
 
 function check_word() {
     let word = document.getElementById("search");
+    let wordValue;
     if (!word) {
-        word = document.getElementById("comment2");
+        wordValue = document.getElementById("comment2").value;
+    } else {
+        wordValue = word.value.replace(/[^A-Za-zА-Яа-яЁё]/g, "");
+        document.getElementById("search_from").action = "search?word=" + wordValue;
     }
     const xhr = new XMLHttpRequest();
 
-    let url = 'http://localhost:8080/fm/check-word?word=' + word.value;
+    let url = 'http://localhost:8080/fm/check-word?word=' + wordValue;
     xhr.open('GET',  url, false);
     xhr.send();
     if (xhr.status !== 200) {

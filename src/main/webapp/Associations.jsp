@@ -26,7 +26,7 @@
     <h1>СЛОВА-АССОЦИАЦИИ</h1>
     <h3>Выберите подходящие тэги, чтобы найти тот самый фильм :) </h3>
 
-    <form method="post" action="search">
+    <form id="search_from" method="post" action="search">
         <p>
             <input oninput="check_word()" type="search" name="search"
                    id="search" placeholder="   #любовь,   #мелодрама,   #танцы" >

@@ -2,7 +2,6 @@ package servlet;
 
 import dto.*;
 import exception.*;
-import liquibase.pro.packaged.F;
 import service.*;
 import useful.*;
 
@@ -19,7 +18,9 @@ import java.util.Arrays;
 public class SearchFilmServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String inputWord = request.getParameter("search");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String inputWord = request.getParameter("word");
         if (inputWord.charAt(0) == '#') {
             inputWord = inputWord.substring(1);
         }
