@@ -73,7 +73,8 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: table;
-    padding-top: 10px;
+    padding-top: 30px;
+    margin: 0 auto;
 }
 
 .btn {
@@ -174,7 +175,7 @@ input[type="checkbox"] {
 }
 
 .box {
-    float: left;
+    margin: 0 auto;
 }
 
 .about_me {

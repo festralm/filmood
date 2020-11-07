@@ -1,4 +1,4 @@
-x<%--
+<%--
   Created by IntelliJ IDEA.
   User: katty
   Date: 29.10.2020
@@ -18,16 +18,15 @@ x<%--
 
 <jsp:include page="includes/menu.jsp"/>
 
-<div class="about_me">
-    <div class="ph" id="ph">
-        <div class="photo" id="photo">
-            <img src="${photo_path}" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="refactorImg">
-            <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
-        </div>
+<%--<div class="ph" id="ph">
+    <div class="photo" id="photo">
+        <img src="${photo_path}" alt="Avatar" class="avatar">
     </div>
+
+    <div class="refactorImg">
+        <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
+    </div>
+</div>--%>
 
     <div class="box">
         <form action="edit-profile" method="post">

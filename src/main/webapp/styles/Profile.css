@@ -88,16 +88,18 @@ h3, h4 {
 
 .categories{
     align-content: center;
+    margin-left: 400px;
+    margin-right: 400px;
 }
-.avatar {
-    height: 220px;
-    /*float: left;*/
-    margin: 0 120px;
-}
+/*.avatar {*/
+/*    height: 220px;*/
+/*    !*float: left;*!*/
+/*    margin: 0 120px;*/
+/*}*/
 
-.profile {
-    float: left;
-}
+/*.profile {*/
+/*    float: left;*/
+/*}*/
 
 .menu {
     padding-top: 20px;
@@ -153,4 +155,8 @@ footer {
     border: none;
     padding: 10px 20px;
     text-decoration: none;
+}
+
+.anketa {
+    margin: 0 auto;
 }
