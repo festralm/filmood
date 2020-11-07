@@ -23,7 +23,7 @@
     <jsp:param name="button" value="<%=button%>"/>
 </jsp:include>
 
-<div class="ph" id="ph">
+<%--<div class="ph" id="ph">
     <div class="photo" id="photo">
         <img src="${photo_path}" alt="Avatar" class="avatar">
     </div>
@@ -31,7 +31,7 @@
     <div class="refactorImg">
         <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
     </div>
-</div>
+</div>--%>
 
 <div class="box">
     <%--    <h2>Имя и фамилия:</h2>--%>

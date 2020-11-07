@@ -46,6 +46,7 @@ function check_word() {
             document.getElementById("submit").disabled = true;
         } else {
             document.getElementById("submit").disabled = false;
+            // window.location.href = "#popup_warning";
         }
     }
 

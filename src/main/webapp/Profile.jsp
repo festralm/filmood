@@ -24,9 +24,9 @@ To change this template use File | Settings | File Templates.
 </jsp:include>
 
 <div class="anketa" id="anketa">
-    <div class="photo" id="photo">
+<%--    <div class="photo" id="photo">
         <img src="${photo_path}" alt="Avatar" class="avatar">
-    </div>
+    </div>--%>
 
     <div class="info" id="info">
         <h1>${fullname}</h1>
@@ -40,7 +40,7 @@ To change this template use File | Settings | File Templates.
         </div>
         <h3></h3>
 
-        <button
+        <input type="button" id="b3" value="Подписаться">
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>

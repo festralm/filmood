@@ -120,6 +120,9 @@ To change this template use File | Settings | File Templates.
 
         <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-wanted';">
         <input class="button4" type="button" id="b4" onclick="window.location.href = '#popup2';" value="Я смотрел!"/>
+        <br>
+        <input type="button" id="b3" value="✩ Избранное" onclick="window.location.href = '#';">
+        <!--    <input type="button" id="b3" value="Добавлено в избранное" onclick="window.location.href = '/ks/save-as-favorite?id=${sight.getId()}';">-->
     </div>
 </div>
 
@@ -132,9 +135,9 @@ To change this template use File | Settings | File Templates.
 </div>
 
 <div class="user_comment" id="user_comment">
-    <div class="ph" id="ph">
+<%--    <div class="ph" id="ph">
         <img src="">
-    </div>
+    </div>--%>
 
     <div class="cm" id="cm">
         <a id="user_name" href="http://localhost:8080/fm/profile">Имя пользователя</a>
