@@ -27,7 +27,7 @@ To change this template use File | Settings | File Templates.
         <h2>${username}</h2>
 
         <div class="categories" id="category">
-            <h3>Любимые жанры:</h3>
+            <h3>Любимые фильмы:</h3>
             <h4>${favorite_genres[0]}</h4>
             <h4>${favorite_genres[1]}</h4>
             <h4>${favorite_genres[2]}</h4>
