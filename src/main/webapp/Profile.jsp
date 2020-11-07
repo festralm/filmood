@@ -10,7 +10,7 @@ To change this template use File | Settings | File Templates.
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${fullname}</title>
+    <title>${username}</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Profile.css">
 </head>

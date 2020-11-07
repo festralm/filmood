@@ -46,9 +46,9 @@ public class AssociationsServlet extends HttpServlet {
             } else {
                 film = filmService.getFilmByWord(inputWord);
             }
-if (film != null) {
-    request.setAttribute("film", film);
-}
+            if (film != null) {
+                request.setAttribute("film", film);
+            }
         }
         String path = "/Associations.jsp";
         ServletContext servletContext = getServletContext();

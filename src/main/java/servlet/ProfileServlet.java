@@ -27,7 +27,12 @@ public class ProfileServlet extends HttpServlet {
 
             UserService userService = new UserService();
             int profileId = Integer.parseInt(request.getParameter("id"));
-            User user = userService.getUserByUserId(userId);
+            User user;
+            if (profileId == 0) {
+                user = userService.getUserByUserId(userId);
+            } else {
+                user = userService.getUserByUserId(profileId);
+            }
 
             request.setAttribute("photo_path", user.getPhotoPath());
             request.setAttribute("fullname", user.getFullname());

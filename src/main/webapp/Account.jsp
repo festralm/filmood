@@ -18,39 +18,39 @@ x<%--
 
 <jsp:include page="includes/menu.jsp"/>
 
-<div class="ph" id="ph">
-    <div class="photo" id="photo">
-        <img src="${photo_path}" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="refactorImg">
-        <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
-    </div>
-</div>
-
-<div class="box">
-    <%--    <h2>Имя и фамилия:</h2>--%>
-    <%--    <input type="text" class="input" value="Абрамский Михаил">--%>
-    <form action="edit-profile" method="post">
-        <h2>Имя и фамилия:</h2>
-        <input name="fullname" type="text" class="input" value="${fullname}">
-
-        <h2>Имя пользователя: </h2>
-        <input name="username" type="text" class="input" value="${username}" required>
-
-        <h2>E-mail:</h2>
-        <input name="email" type="text" class="input" value="${email}" required>
-
-        <h2>Дата рождения:</h2>
-        <input name="birthdate" type="date" class="input" value="${birthdate}">
-
-        <h2>Пароль</h2>
-        <input name="password" type="password" class="input" value="********" required>
-
-        <div class="button">
-            <button class="btn">Редактировать</button>
+<div class="about_me">
+    <div class="ph" id="ph">
+        <div class="photo" id="photo">
+            <img src="${photo_path}" alt="Avatar" class="avatar">
         </div>
-    </form>
+
+        <div class="refactorImg">
+            <a class="rimg" href="http://localhost:8080/fm/refactor">Сменить фото профиля</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <form action="edit-profile" method="post">
+            <h2>Имя и фамилия:</h2>
+            <input name="fullname" type="text" class="input" value="${fullname}">
+
+            <h2>Имя пользователя: </h2>
+            <input name="username" type="text" class="input" value="${username}" required>
+
+            <h2>E-mail:</h2>
+            <input name="email" type="text" class="input" value="${email}" required>
+
+            <h2>Дата рождения:</h2>
+            <input name="birthdate" type="date" class="input" value="${birthdate}">
+
+            <h2>Пароль</h2>
+            <input name="password" type="password" class="input" value="********" required>
+
+            <div class="button">
+                <button class="btn">Редактировать</button>
+            </div>
+        </form>
+    </div>
 </div>
 <jsp:include page="includes/footer.jsp"/>
 </body>

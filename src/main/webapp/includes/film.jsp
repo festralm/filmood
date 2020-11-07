@@ -22,6 +22,6 @@
     <p id="year_country">Год, страна : ${film.getStartYear()}<c:if test="${film.getFinishYear() != -1}"> - ${film.getFinishYear()}</c:if><c:forEach var="country" items="${film.getCountries()}"><c:out value=", ${country}"/></c:forEach></p>
     <p id="genre">Жанр : <c:forEach var="genre" items="${film.getGenres()}"><c:out value=", ${genre}"/></c:forEach></p>
 
-    <input type="button" value="Сохранить на будущее" onclick="window.location.href = 'http://localhost:8080/fm/save-to-will-watch?film_id=${film.getId()}'">
+    <input type="button" value="Сохранить на будущее" onclick="window.location.href = 'http://localhost:8080/fm/save-to-will-watch?id=${film.getId()}'">
     <input class="button4" type="button" id="b4" onclick="describe()" value="Я смотрел!"/>
 </div>

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="styles/Associations.css">
     <script src="js/validation.js"></script>
     <script src="js/popup.js"></script>
+    <script src="js/hide_area2.js"></script>
 </head>
 <body>
 
@@ -40,7 +41,8 @@
         </div>
 
         <p>
-            <input type="submit" value="Найти" id="submit" disabled>
+            <input type="submit" value="Найти" id="submit"
+                   onclick="window.location.href = '#area2';" disabled>
         </p>
     </form>
 </div>

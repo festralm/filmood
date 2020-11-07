@@ -16,6 +16,8 @@ To change this template use File | Settings | File Templates.
     <title>${film.getName()}</title>
 
     <link rel="stylesheet" type="text/css" href="styles/Film.css">
+    <script src="js/popup.js"></script>
+    <script src="js/validation.js"></script>
 </head>
 <body>
 <jsp:include page="includes/menu.jsp"/>
@@ -24,7 +26,7 @@ To change this template use File | Settings | File Templates.
     <h1>${film.getName()}</h1>
 
     <div class="photo" id="photo">
-        <img class="photo" src="${film.getPhotoPath()}">
+        <img class="photo_film" src="${film.getPhotoPath()}">
     </div>
     <div class="info" id="info">
         <p>Год, страна : ${film.getStartYear()}<c:if test="${film.getFinishYear() != -1}"> - ${film.getFinishYear()}</c:if><c:forEach var="country" items="${film.getCountries()}"><c:out value=", ${country}"/></c:forEach></p>
@@ -36,6 +38,7 @@ To change this template use File | Settings | File Templates.
         <p>Краткое описание : ${film.getDescription()}</p>
 
         <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-will-watch?id=${film.getId()}';">
+        <input class="button4" type="button" id="b4" onclick="describe()" value="Я смотрел!"/>
     </div>
 </div>
 
@@ -47,9 +50,9 @@ To change this template use File | Settings | File Templates.
     </form>
 </div>
 <c:forEach var="comment" items="${film.getComments()}">
-    <div class="user_comment" >
+    <div class="user_comment" id="user_comment">
         <div class="ph" >
-            <img src="<c:out value="${comment.getPhotoPath()}"/>">
+            <img class="ph_user" src="<c:out value="${comment.getPhotoPath()}"/>">
         </div>
         <div class="cm" id="cm">
             <a id="user_name" href="http://localhost:8080/fm/profile?id=${comment.getUserId()}">${comment.getUsername()}</a>
@@ -59,5 +62,6 @@ To change this template use File | Settings | File Templates.
 </c:forEach>
 
 <jsp:include page="includes/footer.jsp"/>
+<jsp:include page="includes/describe_popup.jsp"/>
 </body>
 </html>

@@ -41,7 +41,9 @@
             </div>
 
             <div>
-                <input type="password" onblur="check_passwords()" name="password" id="password" placeholder=" " minlength="8" maxlength="32"
+                <input type="password" onblur="check_passwords()"
+                       name="password" id="password" placeholder=" "
+                       minlength="8" maxlength="32"
                        required/>
                 <label for="password">Введите пароль</label>
 
@@ -51,7 +53,8 @@
             </div>
 
             <div>
-                <input type="password" onblur="check_passwords()" name="repeat_password"
+                <input type="password" onblur="check_passwords()"
+                       name="repeat_password"
                        id="repeat_password" placeholder=" "
                        required/>
                 <label for="repeat_password">Повторите пароль</label>
@@ -66,7 +69,7 @@
             </p>
 
             <p>
-                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !" disabled/>
+                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
             </p>
         </form>
     </div>
