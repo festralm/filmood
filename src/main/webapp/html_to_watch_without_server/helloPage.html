@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FILMood</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="../styles/helloPage.css">
+
+<body>
+
+<div class="area1" id="area1">
+    <div class="menu" role="menu">
+        <div class="page_name" id="page_name">
+            <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
+        </div>
+
+        <nav>
+            <a href="http://localhost:8080/fm/my-films" id="myFilms">Моё кино</a> ||
+            <a href="http://localhost:8080/fm/favorites" id="favorites">Избранное</a> ||
+            <a href="http://localhost:8080/fm/will-watch" id="selectedFilms">Буду смотреть</a> ||
+            <a href="http://localhost:8080/fm/categories" id="categories">Все фильмы</a> ||
+            <a href="http://localhost:8080/fm/categories" id="subscription">Подписки</a> ||
+            <a href="http://localhost:8080/fm/profile" id="account">Мой профиль</a> ||
+            <a href="http://localhost:8080/fm/authorize" id="signIn">Войти/Выйти</a>
+
+        </nav>
+    </div>
+
+    <header role="banner">
+        <h1>Не просто смотри кино,</h1>
+        <h1>. . . чувствуй его . . .</h1>
+    </header>
+</div>
+<div class="area2" id="area2">
+    <div class="words" id="words">
+        <h3>Слова-ассоциации</h3>
+        <p>пользователь вводит слова или выбирает предложенные из списка и получает список фильмов по данным темам</p>
+
+        <input class="button3" type="button"
+               onclick="window.location.href = '/fm/associations';" value="Выбрать слова"/>
+    </div>
+
+    <div class="lottery" id="lottery">
+        <h3>Кино-лотерея</h3>
+        <p>на экране появляется набор карточек, пользователь выбирает одну из них, и ему выпадает случайный фильм</p>
+
+        <input class="button4" type="button"
+               onclick="window.location.href = '#popup';" value="Довериться судьбе"/>
+    </div>
+
+    <div class="recommendation" id="recommendation">
+        <h3>"Советы от друзей"</h3>
+        <p>ознакомьтесь с классными фильмами, которые посмотрели ваши друзья ... не отставайте от них!)</p>
+        <input class="button5" type="button"
+               onclick="window.location.href = '/fm/recommendations';"value="Ознакомиться со списком"/>
+    </div>
+</div>
+<footer>
+    <p>Мы всегда готовы Вам помочь!</p>
+    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
+</footer>
+
+<div id="popup" class="popup">
+    <div class="popup_body">
+        <div class="popup_content">
+            <a href="#" class="popup_close">Х</a>
+            <div class="popup_title">Итааак ... сегодня смотрим фильм</div>
+            <div class="popup_text">
+                <div class="new" id="new">
+                    <div class="film">
+                        <div class="ph">
+                            <a href="http://localhost:8080/fm/film">
+                                <img class="ph" src="../photo/film/1.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <a href="http://localhost:8080/fm/film">Название</a>
+
+                        <p>Год, страна : 2020, Россия</p>
+                        <p>Жанр : Комедия</p>
+
+                        <input type="button" id="popup_btn" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-wanted';">
+                        <input class="button4" type="button" id="b4" onclick="window.location.href = '#popup2';" value="Я смотрел!"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

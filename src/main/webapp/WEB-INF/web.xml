@@ -4,13 +4,21 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <welcome-file-list>
+        <welcome-file>/servlet/MainServlet</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.html</location>
+    </error-page>
+    <error-page>
+        <exception-type>exception.main.FMException</exception-type>
+        <location>/something_happend.html</location>
+    </error-page>
 
-    <filter-mapping>
-        <filter-name>AuthorizationFilter</filter-name>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>RegistrationFilter</filter-name>
-        <url-pattern>/registerin</url-pattern>
-    </filter-mapping>
+
 </web-app>

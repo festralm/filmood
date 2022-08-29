@@ -9,22 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LogIn {
-    public static void logIn(String username, String password,
-                             ServletRequest req, ServletResponse resp,
-                             HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void logIn(int userId, HttpServletRequest request,
+                             HttpServletResponse response) throws IOException {
 
-        request.getSession().setAttribute("username", username);
-        request.getSession().setAttribute("password", password);
-        request.getSession().setAttribute("check_password", true);
+        request.getSession().setAttribute("user_id", userId);
 
-        Cookie cookie = new Cookie("user", username + password);
-        if (req.getParameter("check") == null) {
+        Cookie cookie = new Cookie("user_id", Integer.toString(userId));
+        if (request.getParameter("remember_me") == null) {
             cookie.setMaxAge(-1);
         } else {
-            cookie.setMaxAge(60 * 60 * 2);
+            cookie.setMaxAge(60 * 60 * 24);
         }
         response.addCookie(cookie);
         response.sendRedirect("/fm/");
-        //req.getRequestDispatcher("/main").forward(req, resp);
     }
 }

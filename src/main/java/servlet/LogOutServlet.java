@@ -1,13 +1,10 @@
 package servlet;
 
-import useful.CheckSession;
+import useful.Cookies;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/logout")
@@ -17,12 +14,15 @@ public class LogOutServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (CheckSession.check(request.getSession(), request)) {
-            Cookie cookie = new Cookie("user", "");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        if (Cookies.checkCookie(request)) {
+            Cookie cookie = new Cookie("user_id", "");
             cookie.setMaxAge(0);
-            //cookie.setMaxAge(-1); // удаляется тогда, когда закроет браузер
             response.addCookie(cookie);
+            request.getSession().setAttribute("user_id", null);
         }
-        response.sendRedirect("/fm");
+        response.sendRedirect("/fm/");
     }
 }

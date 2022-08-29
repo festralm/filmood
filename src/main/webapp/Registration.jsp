@@ -1,0 +1,79 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: katty
+  Date: 29.10.2020
+  Time: 18:58
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/Registration.css">
+    <script src="js/validation.js"></script>
+</head>
+<body>
+<jsp:include page="includes/menu.jsp"/>
+
+<div class="form">
+    <div class="authorization_form">
+        <form method="post" action="register-in">
+            <h1>Регистрация</h1>
+            <div>
+                <input type="text" onblur="check_username()" name="username" id="username" placeholder=" " required/>
+                <label for="username">Имя пользователя</label>
+
+                <div class="requirements" id="username_error">
+                    Имя пользователя занято
+                </div>
+            </div>
+
+            <div>
+                <input type="email" name="email" id="email" placeholder=" " required/>
+                <label for="email">E-mail</label>
+
+                <div class="requirements">
+                    E-mail введён некорректно
+                </div>
+            </div>
+
+            <div>
+                <input type="password" onblur="check_passwords()"
+                       name="password" id="password" placeholder=" "
+                       minlength="8" maxlength="32"
+                       required/>
+                <label for="password">Введите пароль</label>
+
+                <div class="requirements">
+                    Пароль должен содержать не менее 8 знаков
+                </div>
+            </div>
+
+            <div>
+                <input type="password" onblur="check_passwords()"
+                       name="repeat_password"
+                       id="repeat_password" placeholder=" "
+                       required/>
+                <label for="repeat_password">Повторите пароль</label>
+
+                <div class="requirements" id="passwords_error">
+                    Введённые пароли не совпадают
+                </div>
+            </div>
+
+            <p>
+                <label><input class="check" type="checkbox" name="remember_me">Запомнить меня</label>
+            </p>
+
+            <p>
+                <input class="button" type="submit" name="submit" id="submit" value="Г О Т О В О !"/>
+            </p>
+        </form>
+    </div>
+</div>
+<jsp:include page="includes/footer.jsp"/>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильм</title>
+
+    <link rel="stylesheet" type="text/css" href="../styles/Film.css">
+</head>
+<body>
+<div class="menu" role="menu">
+    <div class="page_name" id="page_name">
+        <a href="http://localhost:8080/fm">FILM <span class="colortext">&</span> MOOD</a>
+    </div>
+
+    <nav>
+        <a href="http://localhost:8080/fm/my-films" id="myFilms">Моё кино</a> ||
+        <a href="http://localhost:8080/fm/favorites" id="favorites">Избранное</a> ||
+        <a href="http://localhost:8080/fm/will-watch" id="selectedFilms">Буду смотреть</a> ||
+        <a href="http://localhost:8080/fm/categories" id="categories">Все фильмы</a> ||
+        <a href="http://localhost:8080/fm/categories" id="subscription">Подписки</a> ||
+        <a href="http://localhost:8080/fm/profile" id="account">Мой профиль</a> ||
+        <a href="http://localhost:8080/fm/authorize" id="signIn">Войти/Выйти</a>
+
+    </nav>
+</div>
+<div class="film" id="film">
+    <h1>Название</h1>
+
+    <div class="photo" id="photo">
+        <img class="photo_film" src="../photo/film/1.jpg">
+    </div>
+    <div class="info" id="info">
+        <p>Год, страна : Неизвестный год, Неизвестные страны</p>
+        <p>Жанр : Неизвестный жанр</p>
+        <p>Краткое описание : Неизвестное описание</p>
+
+        <input type="button" value="Сохранить на будущее" onclick="window.location.href = '/fm/save-to-wanted';">
+        <input class="button4" type="button" id="b4" onclick="window.location.href = '#popup2';" value="Я смотрел!"/>
+        <br>
+        <input type="button" id="b3" value="✩ Избранное" onclick="window.location.href = '#';">
+        <!--    <input type="button" id="b3" value="Добавлено в избранное" onclick="window.location.href = '/ks/save-as-favorite?id=${sight.getId()}';">-->
+    </div>
+</div>
+
+<div class="other" id="other">
+    <form>
+        <p><b>Оставить комментарий к фильму :</b></p>
+        <p><textarea name="comment" id="comment" required></textarea></p>
+        <p><input type="submit"></p>
+    </form>
+</div>
+
+<div class="user_comment" id="user_comment">
+<!--    <div class="ph" id="ph">-->
+<!--        <img class="ph_user" src="../photo/user/1.jpg">-->
+<!--    </div>-->
+
+    <div class="cm" id="cm">
+        <a id="user_name" href="http://localhost:8080/fm/profile">Имя пользователя</a>
+        <p>*комментарий комментарий комментарий комментарий комментарий*</p>
+    </div>
+</div>
+<footer>
+    <p>Мы всегда готовы Вам помочь!</p>
+    <p>По всем вопросам пишите на почту: email.example@gmail.com</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+.page_name {
+    float: left;
+    padding: 0 0 10px 0;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.page_name a{
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: 0;
+}
+
+.page_name a:hover{
+    display: table;
+    border: 0;
+    text-decoration: none;
+}
+
+.colortext {
+    /*color: #834FD0; !* Красный цвет выделения *!*/
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+
+h1 {
+    color: white;
+    text-align: center;
+    position: center;
+    padding-bottom: 5px;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 54px;
+
+    background: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    margin: 20px auto;
+    margin-top: 80px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: normal;
+    color: lightgray;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: lightgray;
+}
+
+h4{
+    border: 2px solid #804FD1; /* Толщина рамки в пикселах,
+                           тип границы (в данном случае сплошная линия) и
+                           цвет линии */
+    padding: 5px 7px; /* Расстояние от текста до рамки */
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+h3, h4 {
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.categories{
+    align-content: center;
+    margin-left: 400px;
+    margin-right: 400px;
+}
+/*.avatar {*/
+/*    height: 220px;*/
+/*    !*float: left;*!*/
+/*    margin: 0 120px;*/
+/*}*/
+
+/*.profile {*/
+/*    float: left;*/
+/*}*/
+
+.menu {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+a:hover {
+    text-decoration: #834FD0 underline;
+    color: white;
+    font-weight: bold;
+}
+
+footer {
+    color: ghostwhite;
+    background: #141414 79%; /* Цвет фона */
+    padding-bottom: 10px; /* Поля вокруг текста */
+    padding-top: 10px;
+    flex: 0 0 auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    border-top-color: #CCCCCC;
+}
+
+#b3 {
+    font-size: 17px;
+    font-weight: bold;
+    background-image: linear-gradient(120deg, #505ADD, #804FD1, #C449B3, #FAA62E);
+    border-radius: 8px;
+    width: 220px;
+    height: 40px;
+    color: white;
+    text-align: center;
+    font-style: normal;
+    margin: 30px 0;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.anketa {
+    margin: 0 auto;
+}
